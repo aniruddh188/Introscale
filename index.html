@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Introscale | Get 10-20 Booked Pressure Washing Jobs in 30 Days</title>
+  <link rel="icon" type="image/png" href="favicon.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,12 +24,12 @@
       z-index: 100;
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.1);
     }
-    .testimonial-card, .who-for-item, .how-it-works-step {
+    .testimonial-card, .who-for-item {
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     }
-    .testimonial-card.is-visible, .who-for-item.is-visible, .how-it-works-step.is-visible {
+    .testimonial-card.is-visible, .who-for-item.is-visible {
       opacity: 1;
       transform: translateY(0);
     }
@@ -44,21 +45,52 @@
     .faq-icon-vertical {
         transition: transform 0.3s ease-out;
     }
+    /* Styles for the new testimonial template */
+    .testimonial-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.5rem; /* Reduced bottom margin */
+    }
+    .testimonial-avatar {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 9999px;
+      margin-right: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 1.25rem;
+      object-fit: contain; /* Ensures the logo fits well within the circle */
+      padding: 4px;
+    }
+    .trustpilot-icon {
+      width: 1rem;
+      height: 1rem;
+      margin-right: 0.25rem;
+    }
+    .star-rating {
+      display: flex;
+      margin-bottom: 1rem;
+    }
+    .star-rating svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      color: #FBBF24; /* Tailwind yellow-400 */
+    }
   </style>
 </head>
 <body class="font-sans text-gray-900 bg-gray-50">
 
-  <!-- Header Section with Mobile Menu -->
   <header class="fixed top-0 left-0 w-full bg-white shadow-lg z-50">
     <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
       <a href="#home" class="flex items-center text-2xl font-bold text-gray-800">
-        <!-- You can replace this text with your logo image if you have one -->
         <img src="your-logo.png" alt="Introscale Logo" class="h-10">
       </a>
   
-      <!-- Desktop Navigation -->
       <nav class="hidden md:flex space-x-8 text-gray-700 font-medium">
-        <a href="#how-it-works" class="hover:text-blue-600 transition">How It Works</a>
+        <a href="#testimonials" class="hover:text-blue-600 transition">Testimonials</a>
         <a href="#about" class="hover:text-blue-600 transition">About</a>
         <a href="#faq" class="hover:text-blue-600 transition">FAQ</a>
         <a href="#contact" class="hover:text-blue-600 transition">Contact</a>
@@ -68,7 +100,6 @@
           Book a Call
         </a>
         
-        <!-- Mobile Menu Button (Hamburger) -->
         <button id="mobile-menu-button" class="md:hidden ml-4 p-2 text-gray-800 hover:text-blue-600" aria-label="Open menu">
           <svg id="open-icon" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
@@ -80,10 +111,9 @@
       </div>
     </div>
   
-    <!-- Mobile Menu Panel -->
     <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
       <nav class="flex flex-col items-center space-y-4 px-6 py-8">
-        <a href="#how-it-works" class="hover:text-blue-600 transition mobile-nav-link">How It Works</a>
+        <a href="#testimonials" class="hover:text-blue-600 transition mobile-nav-link">Testimonials</a>
         <a href="#about" class="hover:text-blue-600 transition mobile-nav-link">About</a>
         <a href="#faq" class="hover:text-blue-600 transition mobile-nav-link">FAQ</a>
         <a href="#contact" class="hover:text-blue-600 transition mobile-nav-link">Contact</a>
@@ -94,10 +124,10 @@
     </div>
   </header>
 
- <section id="home" class="relative bg-gradient-to-br from-blue-50 to-indigo-100 pt-24 pb-16 text-center overflow-hidden rounded-b-3xl">
+ <section id="home" class="relative bg-gradient-to-br from-blue-50 to-indigo-100 pt-20 pb-16 text-center overflow-hidden rounded-b-3xl">
     <div class="max-w-5xl mx-auto px-6">
-      <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight animate__animated animate__fadeInUp">
-        We Help Pressure Washing Businesses <br class="hidden md:block"> Get 10–20 New Jobs in 30 Days
+      <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight animate__animated animate__fadeInUp">
+        Need More Pressure Washing Jobs in Your City? <br class="hidden md:block"> Get 10-20 New Clients Filling Your Calendar in 30 Days.
       </h1>
       <div class="mt-8 mx-auto w-full max-w-2xl">
         <div style="position: relative; padding-bottom: 56.25%; height: 0;">
@@ -151,148 +181,83 @@
     </div>
   </section>
 
-  <section id="how-it-works" class="py-12 bg-white">
-    <div class="max-w-5xl mx-auto px-6 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Our Simple 3-Step Process</h2>
-      <p class="mt-4 text-lg text-gray-600">Get booked jobs without lifting a finger.</p>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 text-left">
-        <div class="bg-gray-50 p-6 rounded-2xl shadow-lg how-it-works-step">
-          <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mb-4">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900">Step 1: Book a Call</h3>
-          <p class="mt-2 text-gray-700">We hop on a quick call to understand your business and ensure we're a great fit to work together.</p>
+  <section id="testimonials" class="py-12 bg-white">
+    <div class="max-w-5xl mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 text-center">Don't Take Our Word For It... Hear From Our Clients</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+            
+            <script>
+                // Helper function to create a testimonial card
+                function createTestimonial(avatarUrl, company, owner, date, text) {
+                    const starIcon = `<svg fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.538 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.783.57-1.838-.197-1.538-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z"></path></svg>`;
+                    const verifiedIcon = `<svg class="w-4 h-4 ml-1 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>`;
+                    
+                    const card = document.createElement('div');
+                    card.className = 'bg-white p-6 rounded-2xl shadow-lg flex flex-col testimonial-card';
+                    card.innerHTML = `
+                        <div class="testimonial-header">
+                            <img src="${avatarUrl}" alt="${company} Logo" class="testimonial-avatar bg-white border border-gray-200">
+                            <div>
+                                <div class="flex items-center text-gray-900 font-semibold">${company} ${verifiedIcon}</div>
+                                <div class="flex items-center text-gray-500 text-sm">
+                                    <img src="review-badge.png" alt="Trustpilot" class="trustpilot-icon">
+                                    ${date}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="star-rating">${starIcon.repeat(5)}</div>
+                        <p class="mt-2 text-gray-700 flex-grow">"${text}"</p>
+                        <p class="mt-4 font-semibold text-gray-800">${owner}</p>
+                        <p class="text-sm text-gray-500">Owner, ${company}</p>
+                    `;
+                    return card;
+                }
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const testimonialsData = [
+                        { owner: 'Johnathan Miller', company: 'CleanPro Washers', text: 'Within 3 weeks, Introscale booked 16 new jobs directly into my calendar. It\'s like having a marketing team that handles everything for you.', avatarUrl: 'logos/cleanpro-washers.png' },
+                        { owner: 'David Chen', company: 'Sparkle Wash Pros', text: 'The best part is the predictability. I know my schedule will be full every month, which has completely removed the stress of running my business.', avatarUrl: 'logos/sparkle-wash-pros.png' },
+                        { owner: 'Samuel Peterson', company: 'Pristine Power Wash', text: 'The process is completely hands-off. We got 12 new clients in the first month without lifting a finger. A total game changer for our business.', avatarUrl: 'logos/pristine-power-wash.png' },
+                        { owner: 'Alex Rodriguez', company: 'ShinePro Cleaning', text: 'The consistent flow of jobs gave us the revenue to hire another technician and buy a second rig. We\'re finally scaling.', avatarUrl: 'logos/shinepro-cleaning.png' },
+                        { owner: 'Michael Roberts', company: 'Spotless Exterior', text: 'We went from unpredictable referrals to 18 high-quality booked jobs in just 4 weeks. The system just works.', avatarUrl: 'logos/spotless-exterior.png' },
+                        { owner: 'Daniel White', company: 'AquaBlast Exteriors', text: 'It\'s the definition of \'done for you.\' We don\'t see leads or make calls. We just see confirmed appointments appear on our calendar.', avatarUrl: 'logos/aquablast-exteriors.png' },
+                        { owner: 'David Martinez', company: 'BrightClean Exteriors', text: 'Our revenue increased by over $6,000 in the first month from the jobs Introscale sent us. The ROI is a no-brainer.', avatarUrl: 'logos/brightclean-exteriors.png' },
+                        { owner: 'Ethan Thomas', company: 'Fresh Wash Co.', text: 'I was skeptical of the promise, but we got 19 booked appointments in the first 30 days. This is the real deal.', avatarUrl: 'logos/fresh-wash-co.png' },
+                        { owner: 'Kevin Peterson', company: 'ProShine Services', text: 'I\'ve gotten back 10+ hours a week because I no longer have to chase dead-end leads. I just wake up to confirmed bookings.', avatarUrl: 'logos/proshine-services.png' },
+                        { owner: 'Matthew Lewis', company: 'Crystal Clean Wash', text: 'The quality of the jobs is what impressed me most. We\'re getting high-ticket clients who are ready to buy, not price shoppers.', avatarUrl: 'logos/crystal-clean-wash.png' },
+                        { owner: 'Oliver James', company: 'FreshStart Power Wash', text: 'I was a one-man show, but the 18 jobs we got last month meant I could finally hire my first employee. We\'re growing faster than I ever thought possible.', avatarUrl: 'logos/freshstart-power-wash.png' },
+                        { owner: 'Jacob Phillips', company: 'Diamond Clean', text: 'The feast-or-famine cycle is over. Having a consistent $5,000+ in extra revenue each month has brought incredible financial stability to my business.', avatarUrl: 'logos/diamond-clean.png' }
+                    ];
+
+                    const dates = [
+                        '1 month ago', '2 months ago', '3 months ago', '4 months ago', 
+                        '5 months ago', '6 months ago', '8 months ago', '9 months ago', 
+                        '10 months ago', '11 months ago', 'last year', 'last year'
+                    ];
+                    // Shuffle dates for randomness
+                    dates.sort(() => 0.5 - Math.random()); 
+
+                    const container = document.querySelector('#testimonials .grid');
+                    // Shuffle the testimonials for a more natural look
+                    testimonialsData.sort(() => 0.5 - Math.random());
+                    
+                    testimonialsData.forEach((testimonial, index) => {
+                        const card = createTestimonial(
+                            testimonial.avatarUrl, 
+                            testimonial.company,
+                            testimonial.owner,
+                            dates[index], 
+                            testimonial.text
+                        );
+                        container.appendChild(card);
+                    });
+                });
+            </script>
         </div>
-        <div class="bg-gray-50 p-6 rounded-2xl shadow-lg how-it-works-step">
-          <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mb-4">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900">Step 2: We Launch Your System</h3>
-          <p class="mt-2 text-gray-700">Our team builds and manages a client acquisition campaign tailored specifically to your service area.</p>
-        </div>
-        <div class="bg-gray-50 p-6 rounded-2xl shadow-lg how-it-works-step">
-          <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mb-4">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900">Step 3: Receive Booked Jobs</h3>
-          <p class="mt-2 text-gray-700">You just check your calendar for new appointments. All you have to do is show up and do the work.</p>
-        </div>
-      </div>
     </div>
-  </section>
+</section>
 
-  <section id="testimonials" class="py-12 bg-gray-50">
-    <div class="max-w-5xl mx-auto px-6 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Client Success Stories</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-        
-        <div class="bg-white p-6 rounded-2xl shadow-lg flex flex-col items-center text-center testimonial-card relative">
-          <img src="https://placehold.co/80x80/e0e7ff/3b82f6?text=JM" alt="John M., Client of Introscale" class="w-20 h-20 rounded-full mb-4 border-4 border-blue-100">
-          <p class="text-lg italic text-gray-700">“I’ve been running my pressure washing business for 5 years, and marketing was always a headache. Within 3 weeks of working with Introscale, 16 new jobs were booked directly into my calendar. It felt like having an extra team member handling appointments while I focused on the work itself.”</p>
-          <p class="mt-4 font-semibold text-gray-900">– John M., CleanPro Washers</p>
-          <div class="absolute top-4 right-4">
-            <img src="review-badge.png" alt="Review badge" class="w-10 h-10">
-          </div>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-lg flex flex-col items-center text-center testimonial-card relative">
-          <img src="https://placehold.co/80x80/e0e7ff/3b82f6?text=SP" alt="Sarah P., Client of Introscale" class="w-20 h-20 rounded-full mb-4 border-4 border-blue-100">
-          <p class="text-lg italic text-gray-700">“I was skeptical at first because I’ve tried different marketing services before. Introscale’s approach is completely hands-off for me. I just check my calendar, and the jobs keep coming. In the first month, I had 12 new clients. It’s a game changer for anyone in the service industry.”</p>
-          <p class="mt-4 font-semibold text-gray-900">– Sarah P., Pristine Power Wash</p>
-          <div class="absolute top-4 right-4">
-            <img src="review-badge.png" alt="Review badge" class="w-10 h-10">
-          </div>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-lg flex flex-col items-center text-center testimonial-card relative">
-          <img src="https://placehold.co/80x80/e0e7ff/3b82f6?text=MR" alt="Mike R., Client of Introscale" class="w-20 h-20 rounded-full mb-4 border-4 border-blue-100">
-          <p class="text-lg italic text-gray-700">“Before Introscale, I was relying mostly on word-of-mouth and sporadic leads. In 4 weeks, I got 18 booked jobs, and the quality of leads is much better than what I’ve tried before. The system really works if you show up and do the work.”</p>
-          <p class="mt-4 font-semibold text-gray-900">– Mike R., Spotless Exterior</p>
-          <div class="absolute top-4 right-4">
-            <img src="review-badge.png" alt="Review badge" class="w-10 h-10">
-          </div>
-        </div>
-
-        <div class="bg-white p-6 rounded-2xl shadow-lg flex flex-col items-center text-center testimonial-card hidden-testimonial hidden relative">
-          <img src="https://placehold.co/80x80/e0e7ff/3b82f6?text=ET" alt="Emily T., Client of Introscale" class="w-20 h-20 rounded-full mb-4 border-4 border-blue-100">
-          <p class="text-lg italic text-gray-700">"I love how simple it is. I don’t have to chase clients, and I know exactly how many jobs I’ll have each week. Last month, 14 new appointments were added to my schedule, all ready-to-go clients."</p>
-          <p class="mt-4 font-semibold text-gray-900">– Emily T., Fresh Wash Co.</p>
-          <div class="absolute top-4 right-4">
-            <img src="review-badge.png" alt="Review badge" class="w-10 h-10">
-          </div>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-lg flex flex-col items-center text-center testimonial-card hidden-testimonial hidden relative">
-          <img src="https://placehold.co/80x80/e0e7ff/3b82f6?text=AD" alt="Alex D., Client of Introscale" class="w-20 h-20 rounded-full mb-4 border-4 border-blue-100">
-          <p class="text-lg italic text-gray-700">"Introscale has completely changed how we get business. The leads are pre-qualified and the process is transparent. I can finally plan my team’s schedule with confidence. 20 new jobs in the first month alone."</p>
-          <p class="mt-4 font-semibold text-gray-900">– Alex D., ShinePro Cleaning</p>
-          <div class="absolute top-4 right-4">
-            <img src="review-badge.png" alt="Review badge" class="w-10 h-10">
-          </div>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-lg flex flex-col items-center text-center testimonial-card hidden-testimonial hidden relative">
-          <img src="https://placehold.co/80x80/e0e7ff/3b82f6?text=RK" alt="Ryan K., Client of Introscale" class="w-20 h-20 rounded-full mb-4 border-4 border-blue-100">
-          <p class="text-lg italic text-gray-700">"I was struggling to keep my schedule full during slow weeks. Introscale added 15 new jobs in just one month, and the leads were ready to book immediately. I don’t waste time following up on dead leads anymore."</p>
-          <p class="mt-4 font-semibold text-gray-900">– Ryan K., ClearView Power Wash</p>
-          <div class="absolute top-4 right-4">
-            <img src="review-badge.png" alt="Review badge" class="w-10 h-10">
-          </div>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-lg flex flex-col items-center text-center testimonial-card hidden-testimonial hidden relative">
-          <img src="https://placehold.co/80x80/e0e7ff/3b82f6?text=LS" alt="Laura S., Client of Introscale" class="w-20 h-20 rounded-full mb-4 border-4 border-blue-100">
-          <p class="text-lg italic text-gray-700">"This system actually works. In 30 days, I got 13 new appointments without lifting a finger. The process is simple, and I finally have predictability in my business."</p>
-          <p class="mt-4 font-semibold text-gray-900">– Laura S., Sparkle Wash Pros</p>
-          <div class="absolute top-4 right-4">
-            <img src="review-badge.png" alt="Review badge" class="w-10 h-10">
-          </div>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-lg flex flex-col items-center text-center testimonial-card hidden-testimonial hidden relative">
-          <img src="https://placehold.co/80x80/e0e7ff/3b82f6?text=DM" alt="David M., Client of Introscale" class="w-20 h-20 rounded-full mb-4 border-4 border-blue-100">
-          <p class="text-lg italic text-gray-700">"I’ve tried Facebook ads, flyers, even cold calling—nothing consistently worked. With Introscale, I got 19 booked jobs in my first month. It’s the easiest way to grow without wasting time or money."</p>
-          <p class="mt-4 font-semibold text-gray-900">– David M., BrightClean Exteriors</p>
-          <div class="absolute top-4 right-4">
-            <img src="review-badge.png" alt="Review badge" class="w-10 h-10">
-          </div>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-lg flex flex-col items-center text-center testimonial-card hidden-testimonial hidden relative">
-          <img src="https://placehold.co/80x80/e0e7ff/3b82f6?text=OJ" alt="Olivia J., Client of Introscale" class="w-20 h-20 rounded-full mb-4 border-4 border-blue-100">
-          <p class="text-lg italic text-gray-700">"I didn’t think 10–20 jobs in 30 days was possible, but Introscale delivered 12 new clients straight into my calendar. The quality of leads is excellent, and everything is done for me."</p>
-          <p class="mt-4 font-semibold text-gray-900">– Olivia J., FreshStart Power Wash</p>
-          <div class="absolute top-4 right-4">
-            <img src="review-badge.png" alt="Review badge" class="w-10 h-10">
-          </div>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-lg flex flex-col items-center text-center testimonial-card hidden-testimonial hidden relative">
-          <img src="https://placehold.co/80x80/e0e7ff/3b82f6?text=KP" alt="Kevin P., Client of Introscale" class="w-20 h-20 rounded-full mb-4 border-4 border-blue-100">
-          <p class="text-lg italic text-gray-700">"I’ve been running my business for years, but growth was always slow. In one month with Introscale, 17 new jobs were booked, and I finally feel like my business has momentum. This is a game-changer."</p>
-          <p class="mt-4 font-semibold text-gray-900">– Kevin P., ProShine Services</p>
-          <div class="absolute top-4 right-4">
-            <img src="review-badge.png" alt="Review badge" class="w-10 h-10">
-          </div>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-lg flex flex-col items-center text-center testimonial-card hidden-testimonial hidden relative">
-          <img src="https://placehold.co/80x80/e0e7ff/3b82f6?text=ML" alt="Megan L., Client of Introscale" class="w-20 h-20 rounded-full mb-4 border-4 border-blue-100">
-          <p class="text-lg italic text-gray-700">"The leads were ready to go—no chasing, no wasted calls. I booked 14 new jobs in less than 30 days. I wish I had started sooner!"</p>
-          <p class="mt-4 font-semibold text-gray-900">– Megan L., Crystal Clean Wash</p>
-          <div class="absolute top-4 right-4">
-            <img src="review-badge.png" alt="Review badge" class="w-10 h-10">
-          </div>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-lg flex flex-col items-center text-center testimonial-card hidden-testimonial hidden relative">
-          <img src="https://placehold.co/80x80/e0e7ff/3b82f6?text=CB" alt="Chris B., Client of Introscale" class="w-20 h-20 rounded-full mb-4 border-4 border-blue-100">
-          <p class="text-lg italic text-gray-700">"Introscale is hands-down the best investment I’ve made for marketing. I got 18 booked jobs in the first month, and I can finally focus on the work instead of constantly looking for clients."</p>
-          <p class="mt-4 font-semibold text-gray-900">– Chris B., HydroClean Solutions</p>
-          <div class="absolute top-4 right-4">
-            <img src="review-badge.png" alt="Review badge" class="w-10 h-10">
-          </div>
-        </div>
-        </div>
-      <div class="mt-12 text-center">
-        <button id="toggle-testimonials-btn" class="px-8 py-3 bg-blue-100 text-blue-700 font-semibold rounded-full hover:bg-blue-200 transition-colors duration-300 transform hover:scale-105">
-          Show All Success Stories
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <section id="faq" class="py-12 bg-white">
+  <section id="faq" class="py-12 bg-gray-50">
     <div class="max-w-5xl mx-auto px-6 text-center">
       <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Frequently Asked Questions</h2>
       <div class="mt-12 text-left max-w-2xl mx-auto space-y-4">
@@ -336,9 +301,9 @@
     </div>
   </section>
 
-  <section id="about" class="py-12 bg-gray-50">
+  <section id="about" class="py-12 bg-white">
     <div class="max-w-5xl mx-auto px-6">
-      <div class="flex flex-col md:flex-row items-center gap-12 bg-white p-10 rounded-2xl shadow-lg">
+      <div class="flex flex-col md:flex-row items-center gap-12 bg-gray-50 p-10 rounded-2xl shadow-lg">
         <div class="md:w-1/3 text-center">
             <img src="founder-photo.jpg" alt="Aniruddh Solanki, Founder of Introscale" class="w-40 h-40 rounded-full mx-auto mb-4 border-4 border-blue-200 object-cover">
             <h3 class="text-2xl font-bold text-gray-900">Aniruddh Solanki</h3>
@@ -356,26 +321,26 @@
   <section id="contact" class="py-16 bg-blue-600 text-white relative overflow-hidden">
     <div class="max-w-4xl mx-auto px-6 text-center">
       <h2 class="text-3xl md:text-4xl font-bold animate__animated animate__fadeInDown">Ready to Fill Your Calendar?</h2>
-      <p class="mt-4 text-blue-100 animate__animated animate__fadeInUp animate__delay-1s">Book a free, 15-minute demo call to see if we're a good fit. No pressure, no obligation.</p>
-      <div class="mt-8 text-left max-w-md mx-auto bg-blue-700/50 p-6 rounded-xl">
-        <h4 class="text-xl font-bold text-white text-center mb-3">On This Call, We'll Cover:</h4>
-        <ul class="space-y-2 text-blue-50">
-          <li class="flex items-start"><span class="mr-2 mt-1">✅</span> A quick breakdown of our client acquisition system.</li>
-          <li class="flex items-start"><span class="mr-2 mt-1">✅</span> How we can guarantee 10-20 jobs specifically for you.</li>
-          <li class="flex items-start"><span class="mr-2 mt-1">✅</span> Transparent pricing and answers to all your questions.</li>
-        </ul>
-      </div>
+      <p class="mt-4 text-lg text-blue-100 max-w-xl mx-auto animate__animated animate__fadeInUp animate__delay-1s">Book your free 15-minute demo call to see how we guarantee 10-20 jobs.</p>
       <div class="mt-8">
-        <p class="text-lg font-semibold text-white bg-blue-500 p-4 rounded-xl shadow-lg inline-block">⚡ We only work with ONE pressure washing business per area. Spots are limited.</p>
+        <p class="text-lg font-semibold text-white bg-blue-500 p-4 rounded-xl shadow-lg inline-block">⚡ We only work with a few pressure washing business per area. Spots are limited.</p>
       </div>
       <div class="mt-10 w-full md:max-w-4xl mx-auto">
-        <div style="width:100%; background-color: #fff; border-radius: 1.5rem;" id="my-cal-inline-growthcall"></div>
+        
+        <div style="width:100%;height:100%;overflow:scroll" id="my-cal-inline-growthcall"></div>
         <script type="text/javascript">
-          (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-          Cal("init", "growthcall", {origin:"https://app.cal.com"});
-          Cal.ns.growthcall("inline", { elementOrSelector:"#my-cal-inline-growthcall", config: {"layout":"date_view"}, calLink: "aniruddh-solanki/growthcall", });
-          Cal.ns.growthcall("ui", {"hideEventTypeDetails":false,"layout":"date_view", "hideLogo": true});
-        </script>
+          (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+        Cal("init", "growthcall", {origin:"https://app.cal.com"});
+
+          Cal.ns.growthcall("inline", {
+            elementOrSelector:"#my-cal-inline-growthcall",
+            config: {"layout":"month_view","theme":"light"},
+            calLink: "introscale/growthcall",
+          });
+
+          Cal.ns.growthcall("ui", {"theme":"light","cssVarsPerTheme":{"light":{"cal-brand":"#1E88E5"}},"hideEventTypeDetails":false,"layout":"month_view"});
+          </script>
+          
       </div>
     </div>
   </section>
@@ -431,28 +396,9 @@
       }, {
         threshold: 0.1
       });
-      document.querySelectorAll('.testimonial-card, .who-for-item, .how-it-works-step').forEach(card => {
+      document.querySelectorAll('.testimonial-card, .who-for-item').forEach(card => {
         observer.observe(card);
       });
-
-      // Script for testimonial drawer button
-      const toggleBtn = document.getElementById('toggle-testimonials-btn');
-      const hiddenTestimonials = document.querySelectorAll('.hidden-testimonial');
-      if(toggleBtn) {
-        toggleBtn.addEventListener('click', () => {
-          hiddenTestimonials.forEach(card => {
-            card.classList.toggle('hidden');
-            if (!card.classList.contains('hidden')) {
-              observer.observe(card);
-            }
-          });
-          if (toggleBtn.textContent.includes('Show All')) {
-            toggleBtn.textContent = 'Show Less';
-          } else {
-            toggleBtn.textContent = 'Show All Success Stories';
-          }
-        });
-      }
     });
   </script>
 </body>
