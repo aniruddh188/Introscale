@@ -299,7 +299,7 @@
     </div>
   </section>
 
-<section id="about" class="py-12 bg-white">
+  <section id="about" class="py-12 bg-white">
     <div class="max-w-5xl mx-auto px-6">
       <div class="flex flex-col md:flex-row items-center gap-12 bg-gray-50 p-10 rounded-2xl shadow-lg">
         <div class="md:w-1/3 text-center">
@@ -370,20 +370,31 @@
   </a>
 
   <script>
-    function toggleFAQ(element) {
-        const answer = element.nextElementSibling;
-        const iconVerticalLine = element.querySelector('.faq-icon-vertical');
-        const isVisible = answer.classList.contains('is-visible');
-        if (isVisible) {
-            answer.classList.remove('is-visible');
-            iconVerticalLine.style.transform = 'rotate(0deg)';
-        } else {
-            answer.classList.add('is-visible');
-            iconVerticalLine.style.transform = 'rotate(90deg)';
-        }
-    }
-
     document.addEventListener('DOMContentLoaded', () => {
+      // Mobile menu toggle
+      const menuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const openIcon = document.getElementById('open-icon');
+      const closeIcon = document.getElementById('close-icon');
+      const navLinks = mobileMenu.querySelectorAll('.mobile-nav-link');
+
+      const toggleMenu = () => {
+        mobileMenu.classList.toggle('hidden');
+        openIcon.classList.toggle('hidden');
+        closeIcon.classList.toggle('hidden');
+      };
+
+      menuButton.addEventListener('click', toggleMenu);
+
+      // Close menu when a link is clicked
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          if (!mobileMenu.classList.contains('hidden')) {
+            toggleMenu();
+          }
+        });
+      });
+      
       // IntersectionObserver for reveal-on-scroll animations
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -399,6 +410,19 @@
         observer.observe(card);
       });
     });
+
+    function toggleFAQ(element) {
+        const answer = element.nextElementSibling;
+        const iconVerticalLine = element.querySelector('.faq-icon-vertical');
+        const isVisible = answer.classList.contains('is-visible');
+        if (isVisible) {
+            answer.classList.remove('is-visible');
+            iconVerticalLine.style.transform = 'rotate(0deg)';
+        } else {
+            answer.classList.add('is-visible');
+            iconVerticalLine.style.transform = 'rotate(90deg)';
+        }
+    }
   </script>
 </body>
 </html>
