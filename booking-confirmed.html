@@ -29,7 +29,7 @@
   <main class="flex-grow pb-16">
     <div class="max-w-4xl mx-auto px-6 text-center">
         <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl animate__animated animate__fadeInUp">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-blue-600">You're Booked!</h1>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-blue-600">You're Booked, <span id="customer-name"></span>!</h1>
             <p class="mt-4 text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">
                 Thanks for setting up a time to chat. Please follow these two important steps.
             </p>
@@ -38,7 +38,7 @@
                     <div class="flex-shrink-0 h-10 w-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold text-xl">1</div>
                     <div class="ml-4">
                         <h2 class="text-xl font-bold text-gray-900">Find the email I just sent you.</h2>
-                        <p class="mt-1 text-gray-600">It has the private video link for our meeting. 
+                        <p class="mt-1 text-gray-600">It has the private video link for our meeting and has been sent to <strong id="customer-email">your email</strong>.
                             <br><i>(Please check your spam folder if you can't find it!)</i>
                         </p>
                     </div>
@@ -87,6 +87,29 @@
   <footer class="py-6 bg-gray-900 text-gray-400 text-center">
     <p>&copy; 2025 Introscale. All rights reserved.</p>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const name = urlParams.get('name');
+        const email = urlParams.get('email');
+
+        const nameElement = document.getElementById('customer-name');
+        const emailElement = document.getElementById('customer-email');
+
+        if (name) {
+            // Split name to get the first name for a more personal touch
+            const firstName = name.split(' ')[0];
+            nameElement.textContent = firstName;
+        } else {
+            nameElement.textContent = ''; // Hide if no name
+        }
+
+        if (email) {
+            emailElement.textContent = email;
+        }
+    });
+  </script>
 
 </body>
 </html>
