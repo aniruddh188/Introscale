@@ -69,27 +69,19 @@
 
   <main class="flex-grow flex flex-col">
     <section id="testimonials" class="py-8 bg-white flex-grow flex flex-col">
-        <div class="max-w-5xl mx-auto px-12 w-full flex-grow flex flex-col">
+        <div class="max-w-5xl mx-auto px-12 w-full flex-grow flex flex-col overflow-hidden">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 text-center flex-shrink-0">Don't Take Our Word For It... Hear From Our Clients</h2>
             <div class="relative mt-8 flex-grow">
-                <div id="testimonial-container" class="flex items-center overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-hide gap-8 h-full">
+                <div id="testimonial-container" class="flex items-center overflow-x-auto scroll-smooth scrollbar-hide gap-8 h-full">
                     <!-- Testimonials will be dynamically injected here -->
                 </div>
-                <button id="prev-btn" class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-lg z-10 hover:bg-white transition hidden sm:flex">
-                    <svg class="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
-                </button>
-                <button id="next-btn" class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-lg z-10 hover:bg-white transition hidden sm:flex">
-                    <svg class="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-                </button>
             </div>
         </div>
     </section>
   </main>
 
-  <section id="get-in-touch" class="bg-gray-800 text-white py-8 flex-shrink-0">
+  <section id="get-in-touch" class="bg-gray-800 text-white py-6 flex-shrink-0">
     <div class="max-w-4xl mx-auto px-6 text-center">
-      <h2 class="text-3xl font-bold mb-4">Get in Touch</h2>
-      <p class="text-lg mb-6 text-gray-300">Have a quick question? Feel free to reach out.</p>
       <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
         <a href="mailto:info@introscale.com" class="flex items-center space-x-2 hover:text-blue-400 transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
@@ -102,10 +94,6 @@
       </div>
     </div>
   </section>
-
-  <footer class="py-4 bg-gray-900 text-gray-400 text-center flex-shrink-0">
-    <p>&copy; 2025 Introscale. All rights reserved.</p>
-  </footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -140,8 +128,7 @@
             const verifiedIcon = `<svg class="w-4 h-4 ml-1 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>`;
             
             const card = document.createElement('div');
-            // Added width, flex-shrink and snap classes for carousel functionality
-            card.className = 'bg-white p-6 rounded-2xl shadow-lg flex flex-col testimonial-card w-[90%] sm:w-[48%] lg:w-[31%] flex-shrink-0 snap-start';
+            card.className = 'bg-white p-6 rounded-2xl shadow-lg flex flex-col testimonial-card w-[90%] sm:w-[48%] lg:w-[31%] flex-shrink-0';
             card.innerHTML = `
                 <div class="testimonial-header">
                     <img src="${avatarUrl}" alt="${company} Logo" class="testimonial-avatar bg-white border border-gray-200" onerror="this.onerror=null; this.src='https://placehold.co/48x48/EBF4FF/1E88E5?text=${company.charAt(0)}';">
@@ -161,48 +148,53 @@
             return card;
         }
 
-        testimonialsData.forEach((testimonial, index) => {
-            const card = createTestimonial(
+        const testimonialNodes = testimonialsData.map((testimonial, index) => {
+             return createTestimonial(
                 testimonial.avatarUrl, 
                 testimonial.company,
                 testimonial.owner,
                 dates[index], 
                 testimonial.text
             );
-            container.appendChild(card);
         });
 
-        // --- Carousel Logic ---
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
+        // Append original and cloned nodes for a seamless loop
+        testimonialNodes.forEach(node => container.appendChild(node));
+        testimonialNodes.forEach(node => container.appendChild(node.cloneNode(true)));
 
-        nextBtn.addEventListener('click', () => {
-            const card = container.querySelector('.testimonial-card');
-            if (card) {
-                // Scroll by the width of one card plus the gap (32px)
-                container.scrollBy({ left: card.offsetWidth + 32, behavior: 'smooth' });
-            }
-        });
+        // --- Auto-scroll Logic ---
+        let scrollInterval;
 
-        prevBtn.addEventListener('click', () => {
-            const card = container.querySelector('.testimonial-card');
-            if (card) {
-                container.scrollBy({ left: -(card.offsetWidth + 32), behavior: 'smooth' });
-            }
-        });
+        function startScrolling() {
+            scrollInterval = setInterval(() => {
+                // When the scroll position reaches the start of the cloned set, reset to the beginning
+                if (container.scrollLeft >= container.scrollWidth / 2) {
+                    container.scrollLeft = 0;
+                } else {
+                    container.scrollLeft += 1; // Adjust this value for scroll speed
+                }
+            }, 30); // Adjust this value for scroll interval/speed
+        }
+
+        function stopScrolling() {
+            clearInterval(scrollInterval);
+        }
+
+        container.addEventListener('mouseenter', stopScrolling);
+        container.addEventListener('mouseleave', startScrolling);
+
+        startScrolling();
 
         // --- Intersection Observer for fade-in effect ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
-                    // Optional: unobserve after first animation
-                    // observer.unobserve(entry.target);
                 }
             });
         }, {
             threshold: 0.1,
-            root: container // Observe elements within the scrolling container
+            root: container
         });
 
         document.querySelectorAll('.testimonial-card').forEach(card => {
