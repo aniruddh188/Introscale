@@ -25,17 +25,7 @@
             object-fit: cover;
             border: 1px solid #e5e7eb; /* border-gray-200 */
         }
-        .star-rating {
-            display: flex;
-            color: #f59e0b; /* amber-500 */
-            margin-top: 0.75rem; /* 12px */
-            gap: 0.125rem; /* 2px */
-        }
-        .star-rating svg {
-            width: 1.25rem; /* 20px */
-            height: 1.25rem; /* 20px */
-        }
-
+        
         /* Marquee styles */
         .marquee-mask {
             overflow: hidden;
@@ -56,9 +46,8 @@
             animation: scroll 80s linear infinite; /* Increased duration for slower scroll */
         }
         
-        /* --- ADDED to make marquee uninteractable --- */
         .marquee-container {
-            pointer-events: none;
+            pointer-events: none; /* Makes marquee uninteractable */
         }
 
         .testimonial-card {
@@ -69,7 +58,6 @@
             overflow: hidden; /* Added for watermark */
         }
 
-        /* --- ADDED Watermark Style --- */
         .testimonial-card::before {
             content: "Introscale";
             position: absolute;
@@ -83,6 +71,17 @@
             white-space: nowrap;
             pointer-events: none; /* Makes text unselectable */
         }
+
+        /* --- ADDED for owner PNG image --- */
+        .owner-avatar-img {
+            width: 3rem; /* 48px */
+            height: 3rem; /* 48px */
+            border-radius: 9999px; /* full */
+            object-fit: cover; /* Ensures image covers the space */
+            flex-shrink: 0; /* Prevent shrinking */
+            border: 1px solid #e5e7eb; /* Light gray border */
+        }
+        /* --- Style for generated avatar removed --- */
 
     </style>
 </head>
@@ -230,17 +229,16 @@
                 </div>
 
                 <script>
+                    // --- MODIFIED createTestimonial function ---
                     // Helper function to create a testimonial card
-                    function createTestimonial(avatarUrl, company, owner, date, text) {
-                        const starIcon = `<svg fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.538 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.783.57-1.838-.197-1.538-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z"></path></svg>`;
+                    function createTestimonial(avatarUrl, company, owner, ownerImg, date, text) {
                         const verifiedIcon = `<svg class="w-5 h-5 ml-1 text-sky-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>`;
                         
                         const card = document.createElement('div');
                         card.className = 'bg-white p-6 rounded-2xl shadow-xl border border-neutral-200 flex flex-col testimonial-card';
                         
-                        /* --- MODIFIED to add z-index wrapper --- */
                         card.innerHTML = `
-                            <div class="relative z-10">
+                            <div class="relative z-10 flex flex-col flex-grow h-full">
                                 <div class="testimonial-header">
                                     <img src="${avatarUrl}" alt="${company} Logo" class="testimonial-avatar">
                                     <div>
@@ -250,29 +248,36 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="star-rating">${starIcon.repeat(5)}</div>
-                                <p class="mt-3 text-neutral-700 flex-grow">"${text}"</p>
-                                <p class="mt-4 font-semibold text-neutral-800">${owner}</p>
-                                <p class="text-sm text-neutral-500">Owner, ${company}</p>
+                                
+                                <p class="mt-4 text-neutral-700 flex-grow">"${text}"</p> 
+                                
+                                <div class="mt-4 flex items-center gap-3"> <img src="${ownerImg}" alt="${owner}" class="owner-avatar-img">
+                                    <div>
+                                        <p class="font-semibold text-neutral-800">${owner}</p>
+                                        <p class="text-sm text-neutral-500">Owner, ${company}</p>
+                                    </div>
+                                </div>
                             </div>
                         `;
                         return card;
                     }
 
+
                     document.addEventListener('DOMContentLoaded', () => {
+                        // --- MODIFIED testimonialsData with ownerImg property ---
                         const testimonialsData = [
-                            { owner: 'Johnathan Miller', company: 'CleanPro Washers', text: 'Within 4 weeks, Introscale booked 16 new Appointments directly into my calendar. It\'s like having a marketing team that handles everything for you.', avatarUrl: 'logos/cleanpro-washers.png' },
-                            { owner: 'David Chen', company: 'Sparkle Wash Pros', text: 'The best part is the predictability. I know my schedule will be full every month, which has completely removed the stress of running my business.', avatarUrl: 'logos/sparkle-wash-pros.png' },
-                            { owner: 'Samuel Peterson', company: 'Pristine Power Wash', text: 'The process is completely hands-off. We got 12 new clients in the first month without lifting a finger. A total game changer for our business.', avatarUrl: 'logos/pristine-power-wash.png' },
-                            { owner: 'Alex Rodriguez', company: 'ShinePro Cleaning', text: 'The consistent flow of jobs gave us the revenue to hire another technician and buy a second rig. We\'re finally scaling.', avatarUrl: 'logos/shinepro-cleaning.png' },
-                            { owner: 'Michael Roberts', company: 'Spotless Exterior', text: 'We went from unpredictable referrals to 18 high-quality booked jobs in just 4 weeks. The system just works.', avatarUrl: 'logos/spotless-exterior.png' },
-                            { owner: 'Daniel White', company: 'AquaBlast Exteriors', text: 'It\'s the definition of \'done for you.\' We don\'t see leads or make calls. We just see confirmed appointments appear on our calendar.', avatarUrl: 'logos/aquablast-exteriors.png' },
-                            { owner: 'David Martinez', company: 'BrightClean Exteriors', text: 'Our revenue increased by over $6,000 in the first month from the jobs Introscale sent us. The ROI is a no-brainer.', avatarUrl: 'logos/brightclean-exteriors.png' },
-                            { owner: 'Ethan Thomas', company: 'Fresh Wash Co.', text: 'I was skeptical of the promise, but we got 19 booked appointments in the first 30 days. This is the real deal.', avatarUrl: 'logos/fresh-wash-co.png' },
-                            { owner: 'Kevin Peterson', company: 'ProShine Services', text: 'I\'ve gotten back 10+ hours a week because I no longer have to chase dead-end leads. I just wake up to confirmed bookings.', avatarUrl: 'logos/proshine-services.png' },
-                            { owner: 'Matthew Lewis', company: 'Crystal Clean Wash', text: 'The quality of the jobs is what impressed me most. We\'re getting high-ticket clients who are ready to buy, not price shoppers.', avatarUrl: 'logos/crystal-clean-wash.png' },
-                            { owner: 'Oliver James', company: 'FreshStart Power Wash', text: 'I was a one-man show, but the 18 jobs we got last month meant I could finally hire my first employee. We\'re growing faster than I ever thought possible.', avatarUrl: 'logos/freshstart-power-wash.png' },
-                            { owner: 'Jacob Phillips', company: 'Diamond Clean', text: 'The feast-or-famine cycle is over. Having a consistent $5,000+ in extra revenue each month has brought incredible financial stability to my business.', avatarUrl: 'logos/diamond-clean.png' }
+                            { owner: 'Johnathan Miller', company: 'CleanPro Washers', text: 'Within 4 weeks, Introscale booked 16 new Appointments directly into my calendar. It\'s like having a marketing team that handles everything for you.', avatarUrl: 'logos/cleanpro-washers.png', ownerImg: 'logos/owner1.png' },
+                            { owner: 'David Chen', company: 'Sparkle Wash Pros', text: 'The best part is the predictability. I know my schedule will be full every month, which has completely removed the stress of running my business.', avatarUrl: 'logos/sparkle-wash-pros.png', ownerImg: 'logos/owner2.png' },
+                            { owner: 'Samuel Peterson', company: 'Pristine Power Wash', text: 'The process is completely hands-off. We got 12 new clients in the first month without lifting a finger. A total game changer for our business.', avatarUrl: 'logos/pristine-power-wash.png', ownerImg: 'logos/owner3.png' },
+                            { owner: 'Alex Rodriguez', company: 'ShinePro Cleaning', text: 'The consistent flow of jobs gave us the revenue to hire another technician and buy a second rig. We\'re finally scaling.', avatarUrl: 'logos/shinepro-cleaning.png', ownerImg: 'logos/owner4.png' },
+                            { owner: 'Michael Roberts', company: 'Spotless Exterior', text: 'We went from unpredictable referrals to 18 high-quality booked jobs in just 4 weeks. The system just works.', avatarUrl: 'logos/spotless-exterior.png', ownerImg: 'logos/owner5.png' },
+                            { owner: 'Daniel White', company: 'AquaBlast Exteriors', text: 'It\'s the definition of \'done for you.\' We don\'t see leads or make calls. We just see confirmed appointments appear on our calendar.', avatarUrl: 'logos/aquablast-exteriors.png', ownerImg: 'logos/owner6.png' },
+                            { owner: 'David Martinez', company: 'BrightClean Exteriors', text: 'Our revenue increased by over $6,000 in the first month from the jobs Introscale sent us. The ROI is a no-brainer.', avatarUrl: 'logos/brightclean-exteriors.png', ownerImg: 'logos/owner7.png' },
+                            { owner: 'Ethan Thomas', company: 'Fresh Wash Co.', text: 'I was skeptical of the promise, but we got 19 booked appointments in the first 30 days. This is the real deal.', avatarUrl: 'logos/fresh-wash-co.png', ownerImg: 'logos/owner8.png' },
+                            { owner: 'Kevin Peterson', company: 'ProShine Services', text: 'I\'ve gotten back 10+ hours a week because I no longer have to chase dead-end leads. I just wake up to confirmed bookings.', avatarUrl: 'logos/proshine-services.png', ownerImg: 'logos/owner9.png' },
+                            { owner: 'Matthew Lewis', company: 'Crystal Clean Wash', text: 'The quality of the jobs is what impressed me most. We\'re getting high-ticket clients who are ready to buy, not price shoppers.', avatarUrl: 'logos/crystal-clean-wash.png', ownerImg: 'logos/owner10.png' },
+                            { owner: 'Oliver James', company: 'FreshStart Power Wash', text: 'I was a one-man show, but the 18 jobs we got last month meant I could finally hire my first employee. We\'re growing faster than I ever thought possible.', avatarUrl: 'logos/freshstart-power-wash.png', ownerImg: 'logos/owner11.png' },
+                            { owner: 'Jacob Phillips', company: 'Diamond Clean', text: 'The feast-or-famine cycle is over. Having a consistent $5,000+ in extra revenue each month has brought incredible financial stability to my business.', avatarUrl: 'logos/diamond-clean.png', ownerImg: 'logos/owner12.png' }
                         ];
 
                         const dates = [
@@ -293,6 +298,7 @@
                                     testimonial.avatarUrl, 
                                     testimonial.company,
                                     testimonial.owner,
+                                    testimonial.ownerImg, // Pass the new image path
                                     dates[index % dates.length],
                                     testimonial.text
                                 );
@@ -305,6 +311,7 @@
                                     testimonial.avatarUrl, 
                                     testimonial.company,
                                     testimonial.owner,
+                                    testimonial.ownerImg, // Pass the new image path
                                     dates[index % dates.length],
                                     testimonial.text
                                 );
@@ -375,7 +382,7 @@
             <span class="text-neutral-500">&bull;</span>
             <a href="/refund-policy" class="hover:text-white">Refund & Cancellation Policy</a>
             <span class="text-neutral-500">&bull;</span>
-            <a href="/shipping-policy" class-"hover:text-white">Shipping & Delivery Policy</a>
+            <a href="/shipping-policy" class/="hover:text-white">Shipping & Delivery Policy</a>
             <span class="text-neutral-500">&bull;</span>
             <a href="/contact-us" class="hover:text-white">Contact Us</a>
         </div>
