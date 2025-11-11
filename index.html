@@ -56,28 +56,37 @@
             animation: scroll 80s linear infinite; /* Increased duration for slower scroll */
         }
         
-        .marquee-container:hover .marquee-track {
-            animation-play-state: paused;
+        /* --- ADDED to make marquee uninteractable --- */
+        .marquee-container {
+            pointer-events: none;
         }
 
         .testimonial-card {
             width: 380px;
             flex-shrink: 0;
             margin-right: 2rem; /* 32px gap */
+            position: relative; /* Added for watermark */
+            overflow: hidden; /* Added for watermark */
+        }
+
+        /* --- ADDED Watermark Style --- */
+        .testimonial-card::before {
+            content: "Introscale";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 3.5rem; /* 56px */
+            font-weight: 800; /* extrabold */
+            color: rgba(2, 132, 199, 0.15); /* Darker blue shade (15% opacity) */
+            z-index: 0; /* Place it in the background */
+            white-space: nowrap;
+            pointer-events: none; /* Makes text unselectable */
         }
 
     </style>
 </head>
 <body class="bg-sky-100 text-neutral-800 antialiased">
-    <!-- Chosen Palette: Calm Harmony (Light Blue, Neutral, Sky Blue Accent) -->
-    <!-- Application Structure Plan: Designed a persuasive landing page with a global blue CTA bar (sticky top-0). The main header is static (not sticky) and black, with simplified navigation. All buttons link to #contact. The flow is: Hero -> Problem -> Solution -> How It Works -> Testimonials -> Cal.com Embed. -->
-    <!-- Visualization & Content Choices: 
-        1. Report Info: Section 3 (Methodology / 4 Phases). Goal: Explain the "how" simply. Viz/Method: 4-Step Process Diagram (HTML/Tailwind Flexbox). Interaction: None, purely visual. Justification: A simple visual flow is easier to digest than text and reinforces the DFY promise. Library: HTML/Tailwind.
-        2. Report Info: Testimonials (User-provided). Goal: Build social proof. Viz/Method: Dynamic JS-generated cards in a seamless CSS-animated horizontal marquee. Interaction: Hover to pause. Justification: An auto-scrolling marquee shows a high volume of proof without taking up vertical space. Library: Vanilla JS + CSS Animations.
-        3. Report Info: Cal.com Embed (User-provided). Goal: Convert prospect to meeting. Viz/Method: Embedded JS widget. Interaction: User books call. Justification: Final conversion step. Library: Cal.com JS.
-    -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-
     <a href="#contact" class="block w-full bg-sky-600 text-white text-center p-2 font-semibold text-sm hover:bg-sky-700 transition-colors sticky top-0 z-50">
         Book Your Free Strategy Call Now
     </a>
@@ -104,7 +113,6 @@
     </header>
 
     <main>
-        <!-- Hero Section -->
         <section id="hero" class="py-20 md:py-32 bg-white">
             <div class="container mx-auto px-6 text-center">
                 <h1 class="text-4xl md:text-6xl font-extrabold text-neutral-900 leading-tight">
@@ -119,7 +127,6 @@
             </div>
         </section>
 
-        <!-- Problem Section -->
         <section id="problem" class="py-20 md:py-28">
             <div class="container mx-auto px-6">
                 <div class="text-center max-w-3xl mx-auto">
@@ -134,7 +141,6 @@
             </div>
         </section>
         
-        <!-- Solution Section -->
         <section id="solution" class="py-20 md:py-28 bg-white">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-base font-semibold text-sky-700 uppercase tracking-wide">The Solution</h2>
@@ -164,7 +170,6 @@
             </div>
         </section>
 
-        <!-- How It Works Section -->
         <section id="how" class="py-20 md:py-28">
             <div class="container mx-auto px-6">
                 <div class="text-center max-w-3xl mx-auto">
@@ -208,7 +213,6 @@
             </div>
         </section>
 
-        <!-- Testimonials Section -->
         <section id="testimonials" class="py-20 md:py-28 bg-white">
             <div class="container mx-auto">
                 <h2 class="text-3xl md:text-4xl font-extrabold text-neutral-900 text-center px-6">
@@ -221,8 +225,7 @@
                 <div class="marquee-container mt-16">
                     <div class="marquee-mask">
                         <div class="marquee-track">
-                            <!-- Testimonials will be dynamically inserted here by JS -->
-                        </div>
+                            </div>
                     </div>
                 </div>
 
@@ -234,20 +237,24 @@
                         
                         const card = document.createElement('div');
                         card.className = 'bg-white p-6 rounded-2xl shadow-xl border border-neutral-200 flex flex-col testimonial-card';
+                        
+                        /* --- MODIFIED to add z-index wrapper --- */
                         card.innerHTML = `
-                            <div class="testimonial-header">
-                                <img src="${avatarUrl}" alt="${company} Logo" class="testimonial-avatar">
-                                <div>
-                                    <div class="flex items-center text-neutral-900 font-semibold">${company} ${verifiedIcon}</div>
-                                    <div class="flex items-center text-neutral-500 text-sm">
-                                        ${date}
+                            <div class="relative z-10">
+                                <div class="testimonial-header">
+                                    <img src="${avatarUrl}" alt="${company} Logo" class="testimonial-avatar">
+                                    <div>
+                                        <div class="flex items-center text-neutral-900 font-semibold">${company} ${verifiedIcon}</div>
+                                        <div class="flex items-center text-neutral-500 text-sm">
+                                            ${date}
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="star-rating">${starIcon.repeat(5)}</div>
+                                <p class="mt-3 text-neutral-700 flex-grow">"${text}"</p>
+                                <p class="mt-4 font-semibold text-neutral-800">${owner}</p>
+                                <p class="text-sm text-neutral-500">Owner, ${company}</p>
                             </div>
-                            <div class="star-rating">${starIcon.repeat(5)}</div>
-                            <p class="mt-3 text-neutral-700 flex-grow">"${text}"</p>
-                            <p class="mt-4 font-semibold text-neutral-800">${owner}</p>
-                            <p class="text-sm text-neutral-500">Owner, ${company}</p>
                         `;
                         return card;
                     }
@@ -310,7 +317,6 @@
             </div>
         </section>
 
-        <!-- CTA / Contact Section -->
         <section id="contact" class="py-16 relative overflow-hidden">
             <div class="max-w-4xl mx-auto px-6 text-center">
                 <h2 class="text-3xl md:text-4xl font-bold text-neutral-900">Ready to Fill Your Calendar?</h2>
@@ -334,7 +340,6 @@
             </div>
         </section>
 
-        <!-- Get in Touch Section -->
         <section id="get-in-touch" class="bg-gray-800 text-white py-12">
             <div class="max-w-4xl mx-auto px-6 text-center">
                 <h2 class="text-3xl font-bold mb-4">Get in Touch</h2>
@@ -370,7 +375,7 @@
             <span class="text-neutral-500">&bull;</span>
             <a href="/refund-policy" class="hover:text-white">Refund & Cancellation Policy</a>
             <span class="text-neutral-500">&bull;</span>
-            <a href="/shipping-policy" class="hover:text-white">Shipping & Delivery Policy</a>
+            <a href="/shipping-policy" class-"hover:text-white">Shipping & Delivery Policy</a>
             <span class="text-neutral-500">&bull;</span>
             <a href="/contact-us" class="hover:text-white">Contact Us</a>
         </div>
@@ -418,4 +423,3 @@
     </script>
 </body>
 </html>
-
