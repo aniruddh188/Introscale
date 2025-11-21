@@ -77,9 +77,9 @@
     <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <div class="flex-shrink-0 flex items-center">
+                <a href="#" class="flex-shrink-0 flex items-center">
                     <span class="text-2xl font-extrabold tracking-tighter text-white">INTROSCALE</span>
-                </div>
+                </a>
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#problem" class="text-sm font-medium text-gray-300 hover:text-white transition">The Problem</a>
                     <a href="#solution" class="text-sm font-medium text-gray-300 hover:text-white transition">The Solution</a>
@@ -87,7 +87,7 @@
                     <a href="#results" class="text-sm font-medium text-gray-300 hover:text-white transition">Results</a>
                 </div>
                 <div>
-                    <a href="#book-call" class="bg-white text-black px-5 py-2.5 rounded-full text-sm font-bold hover:bg-gray-200 transition">Book Strategy Call</a>
+                    <a href="https://cal.com/introscale/growthcall" target="_blank" class="bg-white text-black px-5 py-2.5 rounded-full text-sm font-bold hover:bg-gray-200 transition">Book Strategy Call</a>
                 </div>
             </div>
         </div>
@@ -112,7 +112,7 @@
             </p>
             
             <div class="flex flex-col sm:flex-row justify-center items-center gap-6 mb-8">
-                <a href="#book-call" class="bg-white text-black text-lg font-bold px-8 py-4 rounded-full hover:bg-gray-200 transition w-full sm:w-auto whitespace-nowrap">
+                <a href="https://cal.com/introscale/growthcall" target="_blank" class="bg-white text-black text-lg font-bold px-8 py-4 rounded-full hover:bg-gray-200 transition w-full sm:w-auto whitespace-nowrap">
                     Book Strategy Call <i class="fa-solid fa-arrow-right ml-2"></i>
                 </a>
 
@@ -266,15 +266,18 @@
             </div>
         </div>
 
-        <div class="relative w-full">
-            <div class="absolute left-0 top-0 h-full w-20 md:w-40 bg-gradient-to-r from-brand-dark to-transparent z-10 pointer-events-none"></div>
-            <div class="absolute right-0 top-0 h-full w-20 md:w-40 bg-gradient-to-l from-brand-dark to-transparent z-10 pointer-events-none"></div>
+        <div class="hidden md:block relative w-full">
+            <div class="absolute left-0 top-0 h-full w-40 bg-gradient-to-r from-brand-dark to-transparent z-10 pointer-events-none"></div>
+            <div class="absolute right-0 top-0 h-full w-40 bg-gradient-to-l from-brand-dark to-transparent z-10 pointer-events-none"></div>
 
             <div class="flex gap-6 w-max animate-scroll pointer-events-none">
                 <div class="flex gap-6" id="review-set-1"></div>
                 <div class="flex gap-6" id="review-set-2"></div>
             </div>
         </div>
+
+        <div class="md:hidden flex flex-col items-center gap-6 w-full px-4" id="mobile-reviews">
+            </div>
     </section>
 
     <section class="py-20 px-4">
@@ -292,7 +295,7 @@
                 If we don't hit our promised estimates in the first 30 days, we'll refund your service fee. The risk is entirely on us.
             </p>
             
-            <a href="#book-call" class="inline-block bg-white text-black text-base md:text-lg font-bold px-6 py-3 md:px-10 md:py-4 rounded-full hover:scale-105 transition shadow-[0_0_30px_rgba(255,255,255,0.3)] whitespace-nowrap">
+            <a href="https://cal.com/introscale/growthcall" target="_blank" class="inline-block bg-white text-black text-base md:text-lg font-bold px-6 py-3 md:px-10 md:py-4 rounded-full hover:scale-105 transition shadow-[0_0_30px_rgba(255,255,255,0.3)] whitespace-nowrap">
                 Claim Your Strategy Call
             </a>
 
@@ -301,30 +304,6 @@
                 <span class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> Cancel Anytime</span>
                 <span class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> Results Guaranteed</span>
             </div>
-        </div>
-    </section>
-
-    <section id="book-call" class="py-20 bg-black">
-        <div class="max-w-6xl mx-auto px-4 text-center">
-            
-            <h2 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">Ready to Fill Your Calendar?</h2>
-            <p class="text-gray-400 text-lg mb-10">Book your free 30 min growth call to see how we can fill your calendar.</p>
-            
-            <div class="w-full min-h-[700px] rounded-2xl overflow-hidden border border-white/10 bg-black">
-                <div style="width:100%;height:100%;overflow:scroll" id="my-cal-inline-growthcall"></div>
-                <script type="text/javascript">
-                (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-                Cal("init", "growthcall", {origin:"https://app.cal.com"});
-
-                Cal.ns.growthcall("inline", {
-                    elementOrSelector:"#my-cal-inline-growthcall",
-                    config: {"layout":"month_view", "theme":"dark"},
-                    calLink: "introscale/growthcall",
-                });
-
-                Cal.ns.growthcall("ui", {"hideEventTypeDetails":false, "layout":"month_view", "theme":"dark"});
-                </script>
-                </div>
         </div>
     </section>
 
@@ -382,8 +361,12 @@
         ];
 
         function createCard(review) {
+            // Updated Card Width: w-full max-w-[400px] for Mobile, fixed width for desktop marquee (via JS class if needed, but here using tailwind logic)
+            // Actually, for the marquee to work smoothly, we want fixed width. 
+            // For mobile stack, we want responsive width.
+            // Solution: Use w-full sm:w-[400px]. The mobile container limits width via parent, the scrolling container lets it flow.
             return `
-                <div class="w-[400px] bg-[#0f0f0f] border border-white/10 rounded-2xl p-6 flex-shrink-0 select-none">
+                <div class="w-full sm:w-[400px] bg-[#0f0f0f] border border-white/10 rounded-2xl p-6 flex-shrink-0 select-none">
                     <div class="flex justify-between items-start mb-4">
                         <div class="flex items-center gap-3">
                             <img src="${review.logoImg}" alt="${review.company} Logo" class="w-10 h-10 rounded-full object-cover bg-white/10">
@@ -413,9 +396,16 @@
 
         const set1 = document.getElementById('review-set-1');
         const set2 = document.getElementById('review-set-2');
+        const mobileSet = document.getElementById('mobile-reviews');
+        
         const cardsHTML = reviews.map(createCard).join('');
-        set1.innerHTML = cardsHTML;
-        set2.innerHTML = cardsHTML;
+        
+        // Inject into Desktop Scrolling sets
+        if(set1) set1.innerHTML = cardsHTML;
+        if(set2) set2.innerHTML = cardsHTML;
+        
+        // Inject into Mobile Stacked set
+        if(mobileSet) mobileSet.innerHTML = cardsHTML;
     </script>
 </body>
 </html>
