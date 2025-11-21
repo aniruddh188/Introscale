@@ -1,218 +1,223 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy | Introscale</title>
-    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22black%22/><rect x=%2210%22 y=%2210%22 width=%2280%22 height=%2280%22 fill=%22none%22 stroke=%22white%22 stroke-width=%226%22/><text x=%2250%22 y=%2270%22 font-family=%22sans-serif%22 font-size=%2250%22 font-weight=%22bold%22 fill=%22white%22 text-anchor=%22middle%22>IS</text></svg>">
+    
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#050505',
+                            card: '#0f0f0f',
+                            border: '#1f1f1f',
+                            blue: '#3b82f6',
+                            purple: '#8b5cf6'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            background-color: #000;
+            color: white;
+        }
+        /* Custom Prose Overrides for better contrast */
+        .prose-invert h1, .prose-invert h2, .prose-invert h3, .prose-invert h4 {
+            color: white;
+        }
+        .prose-invert p, .prose-invert ul, .prose-invert li {
+            color: #9ca3af; /* gray-400 */
+        }
+        .prose-invert strong {
+            color: white;
         }
     </style>
 </head>
-<body class="bg-sky-100 text-neutral-800 antialiased">
-    <!-- Chosen Palette: Calm Harmony (Light Blue, Neutral, Sky Blue Accent) -->
-    <!-- Application Structure Plan: This is a legal policy page. It uses the site's existing header and footer for brand consistency. The main content is rendered within a 'prose' container on a white background for maximum readability. -->
-    <!-- Visualization & Content Choices: Content is long-form text. Goal: Readability. Viz/Method: Tailwind 'prose' plugin. Interaction: None. Justification: 'prose' provides excellent default styling for legal/blog text (headings, lists, paragraphs). -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+<body class="antialiased selection:bg-blue-500 selection:text-white">
 
-    <header class="bg-black shadow-sm">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold text-white">
-                Introscale
+    <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-extrabold tracking-tighter text-white">INTROSCALE</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html#problem" class="text-sm font-medium text-gray-300 hover:text-white transition">The Problem</a>
+                    <a href="index.html#solution" class="text-sm font-medium text-gray-300 hover:text-white transition">The Solution</a>
+                    <a href="index.html#process" class="text-sm font-medium text-gray-300 hover:text-white transition">How It Works</a>
+                    <a href="index.html#results" class="text-sm font-medium text-gray-300 hover:text-white transition">Results</a>
+                </div>
+                <div>
+                    <a href="https://cal.com/introscale/growthcall" target="_blank" class="bg-white text-black px-5 py-2.5 rounded-full text-sm font-bold hover:bg-gray-200 transition">Book Strategy Call</a>
+                </div>
             </div>
-            <div class="md:hidden">
-                <button id="nav-toggle" class="text-neutral-200">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                </button>
-            </div>
-        </nav>
-    </header>
-
-    <main>
-        <!-- Privacy Policy Content Section -->
-        <section id="policy" class="py-16 md:py-24 bg-white">
-            <div class="prose prose-lg max-w-4xl mx-auto px-6">
-                <h1>Privacy Policy</h1>
-                <p class="lead">Last Updated: October 31, 2025</p>
-
-                <h2>1. Introduction</h2>
-                <p>Welcome to IntroScale ("we," "us," "our"). This Privacy Policy describes how and why we might collect, store, use, and/or share ("process") your information when you use our marketing services ("Services").</p>
-                <p>This includes when you:</p>
-                <ul>
-                    <li>Visit our website at https://introscale.com/ or any website of ours that links to this privacy notice.</li>
-                    <li>Engage with us as a business client and purchase our marketing services.</li>
-                    <li>Interact with our marketing campaigns (e.g., on social media or search engines) and provide your information as a potential customer for our clients.</li>
-                    <li>Engage with us in other related ways, including sales or events.</li>
-                </ul>
-                <p>This Privacy Policy applies to personal information related to our business clients (e.g., pressure washing companies) and their authorized users (collectively, "Clients") and to the personal information of their potential customers ("End-Customers" or "Leads") that we collect through our marketing activities to provide to our Clients.</p>
-                <p>Reading this privacy notice will help you understand your privacy rights and choices. If you do not agree with our policies and practices, please do not use our Services. If you still have any questions or concerns, please contact us at info@introscale.com.</p>
-                
-                <h2>2. Definitions</h2>
-                <p><strong>Client:</strong> The pressure washing business or other entity that purchases and uses our marketing Services.</p>
-                <p><strong>End-Customer (or Lead):</strong> An individual who expresses interest in our Client's services through our marketing campaigns (e.g., by filling out a lead form on one of our landing pages).</p>
-                <p><strong>Personal Information:</strong> Any information that identifies, relates to, describes, or could reasonably be linked, directly or indirectly, with a particular individual or household. This is synonymous with "Personal Data" under various regulations.</p>
-                <p><strong>Data Fiduciary / Data Controller:</strong> The entity that, alone or jointly with others, determines the purposes and means of the processing of Personal Information. For the purposes of this policy, IntroScale is the Data Fiduciary/Controller of both Client Personal Information and End-Customer Personal Information.</p>
-                <p><strong>Data Principal / Data Subject:</strong> The individual to whom the Personal Information relates.</p>
-
-                <h2>3. Information We Collect and How We Collect It</h2>
-                <p>We collect Personal Information from different sources and in different ways.</p>
-                <h3>3.1. Information You (Our Client) Provide to Us</h3>
-                <p>When you purchase our Services, create an account, or communicate with us, you voluntarily provide us with Personal Information. This may include:</p>
-                <ul>
-                    <li><strong>Contact and Identity Data:</strong> Your first and last name, email address, phone number, company name, and job title.</li>
-                    <li><strong>Account Credentials:</strong> Your username, password, and similar security information used for authentication and account access (if a client portal is provided).</li>
-                    <li><strong>Payment Information:</strong> Credit card details or other payment information required to process your payments for our Services. This information is typically collected and processed directly by our third-party payment processors.</li>
-                </ul>
-                <h3>3.2. Information We Collect from End-Customers (Leads)</h3>
-                <p>When an End-Customer interacts with our marketing campaigns (e.g., on social media, search engines) and voluntarily visits our landing pages, we collect the Personal Information they provide to us. This information includes:</p>
-                <ul>
-                    <li><strong>End-Customer Contact Data:</strong> Name, email address, phone number.</li>
-                    <li><strong>Service Request Data:</strong> Address of the service location, date and time preferences, and notes or details related to the service requested (e.g., "driveway cleaning").</li>
-                </ul>
-                <h3>3.3. Information Collected Automatically</h3>
-                <p>When you (whether a Client or End-Customer) visit, use, or navigate our website or landing pages, we may automatically collect certain information. This information does not reveal your specific identity but may include device and usage information. This includes:</p>
-                <ul>
-                    <li><strong>Device and Connection Information:</strong> Your IP address, browser type and version, device characteristics, operating system, and language preferences.</li>
-                    <li><strong>Usage Information:</strong> Information about how you use our Services, such as the pages you visit, the features you use, and the dates and times of your access.</li>
-                    <li><strong>Cookies and Similar Technologies:</strong> We use cookies to collect and store your information. Please see our Cookie Policy (Section 11) for more details.</li>
-                </ul>
-
-                <h2>4. How and Why We Use Your Information</h2>
-                <p>We process your information for specific, explicit, and legitimate purposes.</p>
-                <ul>
-                    <li><strong>To Provide and Manage the Services:</strong> We use Client Personal Information to create and manage your account, process payments, deliver our marketing services, and provide customer support.</li>
-                    <li><strong>To Generate and Provide Leads to our Clients:</strong> We use End-Customer Personal Information to qualify them as a lead and to transfer this information (e.g., their name, phone number, and service request) to our Client (the pressure washing business) so the Client can contact them to provide a quote and schedule an appointment.</li>
-                    <li><strong>To Communicate with You (Our Client):</strong> We may use your contact information to send you administrative information, such as updates to our terms, security alerts, and support messages.</li>
-                    <li><strong>For Analytics and Service Improvement:</strong> We analyze usage data to understand how our websites are used, to improve their functionality, and to develop new features.</li>
-                    <li><strong>For Marketing and Promotional Communications:</strong> With your consent, we may send you (our Clients) marketing communications about our products and services. You may opt-out of these communications at any time.</li>
-                    <li><strong>To Comply with Legal Obligations:</strong> We may process your information to comply with applicable laws, respond to lawful requests, and protect our rights.</li>
-                </ul>
-
-                <h2>5. Our Legal Bases for Processing</h2>
-                <p>We only process your Personal Information when we have a valid legal basis to do so.</p>
-                <ul>
-                    <li><strong>Performance of a Contract:</strong> We process Client Personal Information to fulfill our contractual obligations to provide the marketing Services you have purchased.</li>
-                    <li><strong>Consent:</strong> We rely on consent to process End-Customer Personal Information via our lead forms. We also rely on your (our Client's) consent for marketing purposes and for non-essential cookies. Under India's DPDP Act, consent must be free, specific, informed, and unambiguous with a clear affirmative action. You have the right to withdraw your consent at any time.</li>
-                    <li><strong>Legitimate Interests:</strong> We may process your information for our legitimate business interests, such as for service improvement and security, provided that your rights do not override those interests.</li>
-                    <li><strong>Legal Obligation:</strong> We may process your information where necessary for compliance with a legal obligation.</li>
-                </ul>
-
-                <h2>6. Disclosure and Sharing of Information</h2>
-                <p>We do not sell your Personal Information. We only share your information in the following situations:</p>
-                <ul>
-                    <li><strong>To Our Clients:</strong> The primary purpose of our service is to collect End-Customer Personal Information (leads) and share it with our Clients (the service providers) so they can follow up and provide a quote or service.</li>
-                    <li><strong>Service Providers:</strong> We may share Personal Information with third-party vendors and service providers who perform services for us. Examples include cloud hosting providers, payment processors, and communication platforms for sending emails. We have contractual agreements in place to ensure they protect your information.</li>
-                    <li><strong>Business Transfers:</strong> We may share your information in connection with any merger, sale of company assets, financing, or acquisition of all or a portion of our business.</li>
-                    <li><strong>Legal Requirements:</strong> We may disclose your information where we are legally required to do so to comply with applicable law, governmental requests, or legal process.</li>
-                </ul>
-
-                <h2>7. International Transfer of Personal Information</h2>
-                <p>Our company is based in India. If you are accessing our Services or marketing forms from the United States or Canada, your Personal Information will be transferred to, stored, and processed in India.</p>
-                <p>We have taken appropriate safeguards to require that your Personal Information will remain protected in accordance with this Privacy Policy and applicable law. For transfers of Personal Information from Canada, we ensure a comparable level of protection through contractual or other means, in compliance with PIPEDA.</p>
-
-                <h2>8. Data Security, Integrity, and Retention</h2>
-                <p>We have implemented appropriate technical and organizational security measures to protect the Personal Information we process. However, no electronic transmission over the Internet can be guaranteed to be 100% secure.</p>
-                <p>We will only keep your Personal Information for as long as it is necessary for the purposes set out in this privacy notice, unless a longer retention period is required by law. When we have no ongoing legitimate business need to process your Personal Information, we will either delete or anonymize it.</p>
-
-                <h2>9. Your Privacy Rights and Choices</h2>
-                <p>Depending on your location, you may havecertain rights regarding your Personal Information under applicable laws. These may include the right to:</p>
-                <ul>
-                    <li>Request access to and obtain a copy of your Personal Information.</li>
-                    <li>Request correction of any inaccurate or incomplete Personal Information.</li>
-                    <li>Request erasure (or deletion) of your Personal Information.</li>
-                    <li>Withdraw your consent at any time.</li>
-                    <li>Lodge a complaint with your local data protection authority.</li>
-                </ul>
-                <p>To exercise any of these rights, please contact us using the details provided below. We will respond to your request in accordance with applicable data protection laws.</p>
-
-                <h2>10. Region-Specific Disclosures</h2>
-                <h3>10.1. For Residents of California (USA)</h3>
-                <p>This section supplements our Privacy Policy and applies solely to residents of California. We adopt this notice to comply with the California Consumer Privacy Act (CCPA) as amended by the CPRA.</p>
-                <ul>
-                    <li><strong>Your Rights:</strong> You have the right to know what personal information is collected, to delete personal information, to correct inaccurate personal information, to opt-out of the "sale" or "sharing" of your personal information, and to limit the use of sensitive personal information.</li>
-                    <li><strong>No Sale or Sharing:</strong> We do not "sell" or "share" your personal information as those terms are defined under the CCPA.</li>
-                    <li><strong>Notice at Collection:</strong> The categories of personal information we have collected, the sources, and the purposes for use are described in Section 3 and Section 4 of this Policy.</li>
-                </ul>
-                <h3>10.2. For Residents of Canada</h3>
-                <p>This section applies to individuals in Canada whose personal information we collect. We adopt this notice to comply with Canada's Personal Information Protection and Electronic Documents Act (PIPEDA).</p>
-                <ul>
-                    <li><strong>Your Rights:</strong> You have the right to access your personal information held by us, request correction of any inaccuracies , and challenge our compliance with PIPEDA's Fair Information Principles.</li>
-                    <li><strong>Accountability:</strong> We are responsible for all personal information under our control, including information transferred to a third party. We have designated a Privacy Officer accountable for our compliance.</li>
-                    <li><strong>Consent:</strong> We will obtain your meaningful consent for the collection, use, and disclosure of your personal information.</li>
-                    <li><strong>Cross-Border Transfers:</strong> As stated in Section 7, your personal information may be transferred to and processed in India. While we use contractual means to provide a comparable level of protection, your information may be subject to the laws of India.</li>
-                </ul>
-
-                <h2>11. Cookie Policy</h2>
-                <p>We use cookies and similar tracking technologies. A cookie is a small text file placed on your device. We use them to operate and secure our Services, remember your preferences, and analyze website traffic. You can set your browser to refuse all or some cookies. If you disable cookies, some parts of our Services may not function properly.</p>
-
-                <h2>12. Children's Privacy</h2>
-                <p>Our Services are not directed to children under the age of 13 (or 18 for consent under India's DPDP Act). We do not knowingly collect Personal Information from children.</p>
-
-                <h2>13. Changes to This Privacy Policy</h2>
-                <p>We may update this Privacy Policy from time to time. The updated version will be indicated by a "Last Updated" date. We encourage you to review this privacy notice frequently.</p>
-
-                <h2>14. How to Contact Us</h2>
-                <p>If you have questions or comments about this notice, or if you would like to exercise your privacy rights, you may contact our designated Privacy Officer at:</p>
-                <p>
-                    <strong>Email:</strong> info@introscale.com<br>
-                    <strong>Phone:</strong> +1 415-941-3717 / +91 7016658905
-                </p>
-
-            </div>
-        </section>
-    </main>
-
-   <footer class="py-12 bg-black text-neutral-400">
-    <div class="container mx-auto px-6 text-center">
-        <img src="your-logo.png" alt="Introscale Logo" class="h-8 mx-auto mb-4" 
-             onerror="this.src='https://placehold.co/120x32/171717/FFFFFF?text=Introscale&font=inter'; this.onerror=null;">
-        <p>&copy; 2025 Introscale. All rights reserved.</p>
-        <p class="text-sm mt-2">
-            This website is not part of the YouTube, Google, or Facebook website; Google Inc or Facebook Inc.
-            Also, this website is NOT endorsed by YouTube, Google or Facebook in any way.
-            FACEBOOK is a trademark of FACEBOOK Inc. YOUTUBE is a trademark of GOOGLE Inc.
-        </p>
-        <div class="mt-4 space-x-4 text-sm">
-            <a href="/privacy-policy" class="hover:text-white">Privacy Policy</a>
-            <span class="text-neutral-500">&bull;</span>
-            <a href="/terms-and-conditions" class="hover:text-white">Terms & Conditions</a>
-            <span class="text-neutral-500">&bull;</span>
-            <a href="/refund-policy" class="hover:text-white">Refund & Cancellation Policy</a>
-            <span class="text-neutral-500">&bull;</span>
-            <a href="/shipping-policy" class="hover:text-white">Shipping & Delivery Policy</a>
-            <span class="text-neutral-500">&bull;</span>
-            <a href="/contact-us" class="hover:text-white">Contact Us</a>
         </div>
-    </div>
-</footer>
+    </nav>
 
+    <section class="pt-32 pb-20 px-6 bg-brand-dark min-h-screen">
+        <div class="max-w-4xl mx-auto prose prose-invert prose-lg">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Privacy Policy</h1>
+            <p class="text-gray-500 text-sm mb-12">Last Updated: October 31, 2025</p>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
+            <h2>1. Introduction</h2>
+            <p>Welcome to IntroScale ("we," "us," "our"). This Privacy Policy describes how and why we might collect, store, use, and/or share ("process") your information when you use our marketing services ("Services").</p>
+            <p>This includes when you:</p>
+            <ul>
+                <li>Visit our website at https://introscale.com/ or any website of ours that links to this privacy notice.</li>
+                <li>Engage with us as a business client and purchase our marketing services.</li>
+                <li>Interact with our marketing campaigns (e.g., on social media or search engines) and provide your information as a potential customer for our clients.</li>
+                <li>Engage with us in other related ways, including sales or events.</li>
+            </ul>
+            <p>This Privacy Policy applies to personal information related to our business clients (e.g., pressure washing companies) and their authorized users (collectively, "Clients") and to the personal information of their potential customers ("End-Customers" or "Leads") that we collect through our marketing activities to provide to our Clients.</p>
+            <p>Reading this privacy notice will help you understand your privacy rights and choices. If you do not agree with our policies and practices, please do not use our Services. If you still have any questions or concerns, please contact us at info@introscale.com.</p>
             
-            const navToggle = document.getElementById('nav-toggle');
-            const navMenu = document.getElementById('nav-menu');
-            if (navToggle) {
-                navToggle.addEventListener('click', () => {
-                    navMenu.classList.toggle('hidden');
-                });
-            }
+            <h2>2. Definitions</h2>
+            <p><strong>Client:</strong> The pressure washing business or other entity that purchases and uses our marketing Services.</p>
+            <p><strong>End-Customer (or Lead):</strong> An individual who expresses interest in our Client's services through our marketing campaigns (e.g., by filling out a lead form on one of our landing pages).</p>
+            <p><strong>Personal Information:</strong> Any information that identifies, relates to, describes, or could reasonably be linked, directly or indirectly, with a particular individual or household. This is synonymous with "Personal Data" under various regulations.</p>
+            <p><strong>Data Fiduciary / Data Controller:</strong> The entity that, alone or jointly with others, determines the purposes and means of the processing of Personal Information. For the purposes of this policy, IntroScale is the Data Fiduciary/Controller of both Client Personal Information and End-Customer Personal Information.</p>
+            <p><strong>Data Principal / Data Subject:</strong> The individual to whom the Personal Information relates.</p>
 
-            // No scroll-to-anchor script needed on this page
+            <h2>3. Information We Collect and How We Collect It</h2>
+            <p>We collect Personal Information from different sources and in different ways.</p>
+            <h3>3.1. Information You (Our Client) Provide to Us</h3>
+            <p>When you purchase our Services, create an account, or communicate with us, you voluntarily provide us with Personal Information. This may include:</p>
+            <ul>
+                <li><strong>Contact and Identity Data:</strong> Your first and last name, email address, phone number, company name, and job title.</li>
+                <li><strong>Account Credentials:</strong> Your username, password, and similar security information used for authentication and account access (if a client portal is provided).</li>
+                <li><strong>Payment Information:</strong> Credit card details or other payment information required to process your payments for our Services. This information is typically collected and processed directly by our third-party payment processors.</li>
+            </ul>
+            <h3>3.2. Information We Collect from End-Customers (Leads)</h3>
+            <p>When an End-Customer interacts with our marketing campaigns (e.g., on social media, search engines) and voluntarily visits our landing pages, we collect the Personal Information they provide to us. This information includes:</p>
+            <ul>
+                <li><strong>End-Customer Contact Data:</strong> Name, email address, phone number.</li>
+                <li><strong>Service Request Data:</strong> Address of the service location, date and time preferences, and notes or details related to the service requested (e.g., "driveway cleaning").</li>
+            </ul>
+            <h3>3.3. Information Collected Automatically</h3>
+            <p>When you (whether a Client or End-Customer) visit, use, or navigate our website or landing pages, we may automatically collect certain information. This information does not reveal your specific identity but may include device and usage information. This includes:</p>
+            <ul>
+                <li><strong>Device and Connection Information:</strong> Your IP address, browser type and version, device characteristics, operating system, and language preferences.</li>
+                <li><strong>Usage Information:</strong> Information about how you use our Services, such as the pages you visit, the features you use, and the dates and times of your access.</li>
+                <li><strong>Cookies and Similar Technologies:</strong> We use cookies to collect and store your information. Please see our Cookie Policy (Section 11) for more details.</li>
+            </ul>
 
-        });
-    </script>
+            <h2>4. How and Why We Use Your Information</h2>
+            <p>We process your information for specific, explicit, and legitimate purposes.</p>
+            <ul>
+                <li><strong>To Provide and Manage the Services:</strong> We use Client Personal Information to create and manage your account, process payments, deliver our marketing services, and provide customer support.</li>
+                <li><strong>To Generate and Provide Leads to our Clients:</strong> We use End-Customer Personal Information to qualify them as a lead and to transfer this information (e.g., their name, phone number, and service request) to our Client (the pressure washing business) so the Client can contact them to provide a quote and schedule an appointment.</li>
+                <li><strong>To Communicate with You (Our Client):</strong> We may use your contact information to send you administrative information, such as updates to our terms, security alerts, and support messages.</li>
+                <li><strong>For Analytics and Service Improvement:</strong> We analyze usage data to understand how our websites are used, to improve their functionality, and to develop new features.</li>
+                <li><strong>For Marketing and Promotional Communications:</strong> With your consent, we may send you (our Clients) marketing communications about our products and services. You may opt-out of these communications at any time.</li>
+                <li><strong>To Comply with Legal Obligations:</strong> We may process your information to comply with applicable laws, respond to lawful requests, and protect our rights.</li>
+            </ul>
+
+            <h2>5. Our Legal Bases for Processing</h2>
+            <p>We only process your Personal Information when we have a valid legal basis to do so.</p>
+            <ul>
+                <li><strong>Performance of a Contract:</strong> We process Client Personal Information to fulfill our contractual obligations to provide the marketing Services you have purchased.</li>
+                <li><strong>Consent:</strong> We rely on consent to process End-Customer Personal Information via our lead forms. We also rely on your (our Client's) consent for marketing purposes and for non-essential cookies. Under India's DPDP Act, consent must be free, specific, informed, and unambiguous with a clear affirmative action. You have the right to withdraw your consent at any time.</li>
+                <li><strong>Legitimate Interests:</strong> We may process your information for our legitimate business interests, such as for service improvement and security, provided that your rights do not override those interests.</li>
+                <li><strong>Legal Obligation:</strong> We may process your information where necessary for compliance with a legal obligation.</li>
+            </ul>
+
+            <h2>6. Disclosure and Sharing of Information</h2>
+            <p>We do not sell your Personal Information. We only share your information in the following situations:</p>
+            <ul>
+                <li><strong>To Our Clients:</strong> The primary purpose of our service is to collect End-Customer Personal Information (leads) and share it with our Clients (the service providers) so they can follow up and provide a quote or service.</li>
+                <li><strong>Service Providers:</strong> We may share Personal Information with third-party vendors and service providers who perform services for us. Examples include cloud hosting providers, payment processors, and communication platforms for sending emails. We have contractual agreements in place to ensure they protect your information.</li>
+                <li><strong>Business Transfers:</strong> We may share your information in connection with any merger, sale of company assets, financing, or acquisition of all or a portion of our business.</li>
+                <li><strong>Legal Requirements:</strong> We may disclose your information where we are legally required to do so to comply with applicable law, governmental requests, or legal process.</li>
+            </ul>
+
+            <h2>7. International Transfer of Personal Information</h2>
+            <p>Our company is based in India. If you are accessing our Services or marketing forms from the United States or Canada, your Personal Information will be transferred to, stored, and processed in India.</p>
+            <p>We have taken appropriate safeguards to require that your Personal Information will remain protected in accordance with this Privacy Policy and applicable law. For transfers of Personal Information from Canada, we ensure a comparable level of protection through contractual or other means, in compliance with PIPEDA.</p>
+
+            <h2>8. Data Security, Integrity, and Retention</h2>
+            <p>We have implemented appropriate technical and organizational security measures to protect the Personal Information we process. However, no electronic transmission over the Internet can be guaranteed to be 100% secure.</p>
+            <p>We will only keep your Personal Information for as long as it is necessary for the purposes set out in this privacy notice, unless a longer retention period is required by law. When we have no ongoing legitimate business need to process your Personal Information, we will either delete or anonymize it.</p>
+
+            <h2>9. Your Privacy Rights and Choices</h2>
+            <p>Depending on your location, you may have certain rights regarding your Personal Information under applicable laws. These may include the right to:</p>
+            <ul>
+                <li>Request access to and obtain a copy of your Personal Information.</li>
+                <li>Request correction of any inaccurate or incomplete Personal Information.</li>
+                <li>Request erasure (or deletion) of your Personal Information.</li>
+                <li>Withdraw your consent at any time.</li>
+                <li>Lodge a complaint with your local data protection authority.</li>
+            </ul>
+            <p>To exercise any of these rights, please contact us using the details provided below. We will respond to your request in accordance with applicable data protection laws.</p>
+
+            <h2>10. Region-Specific Disclosures</h2>
+            <h3>10.1. For Residents of California (USA)</h3>
+            <p>This section supplements our Privacy Policy and applies solely to residents of California. We adopt this notice to comply with the California Consumer Privacy Act (CCPA) as amended by the CPRA.</p>
+            <ul>
+                <li><strong>Your Rights:</strong> You have the right to know what personal information is collected, to delete personal information, to correct inaccurate personal information, to opt-out of the "sale" or "sharing" of your personal information, and to limit the use of sensitive personal information.</li>
+                <li><strong>No Sale or Sharing:</strong> We do not "sell" or "share" your personal information as those terms are defined under the CCPA.</li>
+                <li><strong>Notice at Collection:</strong> The categories of personal information we have collected, the sources, and the purposes for use are described in Section 3 and Section 4 of this Policy.</li>
+            </ul>
+            <h3>10.2. For Residents of Canada</h3>
+            <p>This section applies to individuals in Canada whose personal information we collect. We adopt this notice to comply with Canada's Personal Information Protection and Electronic Documents Act (PIPEDA).</p>
+            <ul>
+                <li><strong>Your Rights:</strong> You have the right to access your personal information held by us, request correction of any inaccuracies , and challenge our compliance with PIPEDA's Fair Information Principles.</li>
+                <li><strong>Accountability:</strong> We are responsible for all personal information under our control, including information transferred to a third party. We have designated a Privacy Officer accountable for our compliance.</li>
+                <li><strong>Consent:</strong> We will obtain your meaningful consent for the collection, use, and disclosure of your personal information.</li>
+                <li><strong>Cross-Border Transfers:</strong> As stated in Section 7, your personal information may be transferred to and processed in India. While we use contractual means to provide a comparable level of protection, your information may be subject to the laws of India.</li>
+            </ul>
+
+            <h2>11. Cookie Policy</h2>
+            <p>We use cookies and similar tracking technologies. A cookie is a small text file placed on your device. We use them to operate and secure our Services, remember your preferences, and analyze website traffic. You can set your browser to refuse all or some cookies. If you disable cookies, some parts of our Services may not function properly.</p>
+
+            <h2>12. Children's Privacy</h2>
+            <p>Our Services are not directed to children under the age of 13 (or 18 for consent under India's DPDP Act). We do not knowingly collect Personal Information from children.</p>
+
+            <h2>13. Changes to This Privacy Policy</h2>
+            <p>We may update this Privacy Policy from time to time. The updated version will be indicated by a "Last Updated" date. We encourage you to review this privacy notice frequently.</p>
+
+            <h2>14. How to Contact Us</h2>
+            <p>If you have questions or comments about this notice, or if you would like to exercise your privacy rights, you may contact our designated Privacy Officer at:</p>
+            <p>
+                <strong>Email:</strong> info@introscale.com<br>
+                <strong>Phone:</strong> +1 415-941-3717 / +91 7016658905
+            </p>
+
+        </div>
+    </section>
+
+    <footer class="bg-black py-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="text-3xl font-bold mb-8 tracking-tighter border-2 border-white inline-block px-2 py-1">IS</div>
+            
+            <div class="flex justify-center gap-8 mb-8 flex-wrap">
+                <a href="contact-us.html" class="text-gray-400 hover:text-white text-sm">Contact Us</a>
+                <a href="privacy-policy.html" class="text-gray-400 hover:text-white text-sm">Privacy Policy</a>
+                <a href="terms-and-conditions.html" class="text-gray-400 hover:text-white text-sm">Terms & Conditions</a>
+                <a href="refund-policy.html" class="text-gray-400 hover:text-white text-sm">Refund Policy</a>
+            </div>
+            
+            <p class="text-gray-600 text-sm mb-4">&copy; 2025 Introscale. All rights reserved.</p>
+            
+            <p class="text-gray-700 text-xs max-w-2xl mx-auto leading-relaxed">
+                This website is not part of the YouTube, Google, or Facebook website; Google Inc or Facebook Inc. Also, this website is NOT endorsed by YouTube, Google or Facebook in any way.
+            </p>
+        </div>
+    </footer>
+
 </body>
 </html>
-
-
-
-
-
-
