@@ -1,84 +1,131 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Refund & Cancellation Policy | Introscale</title>
-  <link rel="icon" type="image/png" href="favicon.png">
-  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <style>body { font-family: 'Inter', sans-serif; }</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refund & Cancellation Policy | Introscale</title>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22black%22/><rect x=%2210%22 y=%2210%22 width=%2280%22 height=%2280%22 fill=%22none%22 stroke=%22white%22 stroke-width=%226%22/><text x=%2250%22 y=%2270%22 font-family=%22sans-serif%22 font-size=%2250%22 font-weight=%22bold%22 fill=%22white%22 text-anchor=%22middle%22>IS</text></svg>">
+    
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#050505',
+                            card: '#0f0f0f',
+                            border: '#1f1f1f',
+                            blue: '#3b82f6',
+                            purple: '#8b5cf6'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #000;
+            color: white;
+        }
+        /* Custom Prose Overrides for better contrast */
+        .prose-invert h1, .prose-invert h2, .prose-invert h3, .prose-invert h4 {
+            color: white;
+        }
+        .prose-invert p, .prose-invert ul, .prose-invert li {
+            color: #9ca3af; /* gray-400 */
+        }
+        .prose-invert strong {
+            color: white;
+        }
+    </style>
 </head>
-<body class="bg-sky-100 text-neutral-800 antialiased">
-  <header class="bg-black shadow-sm">
-    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-      <div class="text-2xl font-bold text-white">Introscale</div>
-    </nav>
-  </header>
+<body class="antialiased selection:bg-blue-500 selection:text-white">
 
-  <main>
-    <section id="policy" class="py-16 md:py-24 bg-white">
-      <div class="prose prose-lg max-w-4xl mx-auto px-6">
-        <h1>Refund & Cancellation Policy</h1>
-        <p class="lead">Last Updated: November 4, 2025</p>
-
-        <h2>1. Overview</h2>
-        <p>At Introscale, we are committed to delivering high-quality, performance-based digital marketing services. This Refund & Cancellation Policy outlines the terms under which you may request a refund or cancel your subscription.</p>
-
-        <h2>2. Refund Eligibility</h2>
-        <p>Refunds are applicable only under the following circumstances:</p>
-        <ul>
-          <li>If we fail to deliver the number of qualified, booked appointments as outlined in your service agreement.</li>
-          <li>If a duplicate payment was made due to a technical error.</li>
-          <li>If the service was purchased but never initiated due to internal reasons on our part.</li>
-        </ul>
-        <p>Refunds are not applicable for partial service usage, client-side delays, or performance beyond our control.</p>
-
-        <h2>3. Refund Process</h2>
-        <p>To request a refund, please email info@introscale.com
- with your campaign details and results summary. Once your request is verified, approved refunds will be processed within 7–10 business days to the original payment method.</p>
-        <p>Cancellations made before campaign launch are eligible for a full refund. Cancellations made after launch but before 30 days are not eligible, as the service is already in execution.</p>
-
-        <h2>4. Cancellation Policy</h2>
-        <p>Clients may cancel their service subscription with a <strong>30-day written notice</strong> before the next billing cycle. Cancellations made after renewal will take effect in the next cycle.</p>
-
-        <h2>5. Exceptions</h2>
-        <p>No refunds will be issued once the guaranteed results have been achieved, or if campaign data shows leads were generated as per service commitments.</p>
-
-        <h2>6. Contact Us</h2>
-        <p>If you have any questions about our refund or cancellation process, please contact us at:</p>
-        <p><strong>Email:</strong> info@introscale.com<br>
-           <strong>Phone:</strong> +1 415-941-3717 / +91 7016658905</p>
-      </div>
-    </section>
-  </main>
-
-<footer class="py-12 bg-black text-neutral-400">
-    <div class="container mx-auto px-6 text-center">
-        <img src="your-logo.png" alt="Introscale Logo" class="h-8 mx-auto mb-4" 
-             onerror="this.src='https://placehold.co/120x32/171717/FFFFFF?text=Introscale&font=inter'; this.onerror=null;">
-        <p>&copy; 2025 Introscale. All rights reserved.</p>
-        <p class="text-sm mt-2">
-            This website is not part of the YouTube, Google, or Facebook website; Google Inc or Facebook Inc.
-            Also, this website is NOT endorsed by YouTube, Google or Facebook in any way.
-            FACEBOOK is a trademark of FACEBOOK Inc. YOUTUBE is a trademark of GOOGLE Inc.
-        </p>
-        <div class="mt-4 space-x-4 text-sm">
-            <a href="/privacy-policy" class="hover:text-white">Privacy Policy</a>
-            <span class="text-neutral-500">&bull;</span>
-            <a href="/terms-and-conditions" class="hover:text-white">Terms & Conditions</a>
-            <span class="text-neutral-500">&bull;</span>
-            <a href="/refund-policy" class="hover:text-white">Refund & Cancellation Policy</a>
-            <span class="text-neutral-500">&bull;</span>
-            <a href="/shipping-policy" class="hover:text-white">Shipping & Delivery Policy</a>
-            <span class="text-neutral-500">&bull;</span>
-            <a href="/contact-us" class="hover:text-white">Contact Us</a>
+    <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-extrabold tracking-tighter text-white">INTROSCALE</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html#problem" class="text-sm font-medium text-gray-300 hover:text-white transition">The Problem</a>
+                    <a href="index.html#solution" class="text-sm font-medium text-gray-300 hover:text-white transition">The Solution</a>
+                    <a href="index.html#process" class="text-sm font-medium text-gray-300 hover:text-white transition">How It Works</a>
+                    <a href="index.html#results" class="text-sm font-medium text-gray-300 hover:text-white transition">Results</a>
+                </div>
+                <div>
+                    <a href="https://cal.com/introscale/growthcall" target="_blank" class="bg-white text-black px-5 py-2.5 rounded-full text-sm font-bold hover:bg-gray-200 transition">Book Strategy Call</a>
+                </div>
+            </div>
         </div>
-    </div>
-</footer>
+    </nav>
+
+    <section class="pt-32 pb-20 px-6 bg-brand-dark min-h-screen">
+        <div class="max-w-4xl mx-auto prose prose-invert prose-lg">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Refund & Cancellation Policy</h1>
+            <p class="text-gray-500 text-sm mb-12">Last Updated: November 4, 2025</p>
+
+            <h2>1. Overview</h2>
+            <p>At Introscale, we are committed to delivering high-quality, performance-based digital marketing services. This Refund & Cancellation Policy outlines the terms under which you may request a refund or cancel your subscription.</p>
+
+            <h2>2. Refund Eligibility</h2>
+            <p>Refunds are applicable only under the following circumstances:</p>
+            <ul>
+              <li>If we fail to deliver the number of qualified, booked appointments as outlined in your service agreement.</li>
+              <li>If a duplicate payment was made due to a technical error.</li>
+              <li>If the service was purchased but never initiated due to internal reasons on our part.</li>
+            </ul>
+            <p>Refunds are not applicable for partial service usage, client-side delays, or performance beyond our control.</p>
+
+            <h2>3. Refund Process</h2>
+            <p>To request a refund, please email info@introscale.com with your campaign details and results summary. Once your request is verified, approved refunds will be processed within 7–10 business days to the original payment method.</p>
+            
+            <p><strong>Important Note on Fees:</strong> Please be aware that any refund issued will be calculated <strong>minus any payment processing fees (e.g., Stripe, PayPal) and currency conversion charges</strong> incurred during the initial transaction. These third-party fees are non-refundable.</p>
+
+            <p>Cancellations made before campaign launch are eligible for a refund (subject to the fee deduction above). Cancellations made after launch but before 30 days are not eligible, as the service is already in execution.</p>
+
+            <h2>4. Cancellation Policy</h2>
+            <p>Clients may cancel their service subscription with a <strong>30-day written notice</strong> before the next billing cycle. Cancellations made after renewal will take effect in the next cycle.</p>
+
+            <h2>5. Exceptions</h2>
+            <p>No refunds will be issued once the guaranteed results have been achieved, or if campaign data shows leads were generated as per service commitments.</p>
+
+            <h2>6. Contact Us</h2>
+            <p>If you have any questions about our refund or cancellation process, please contact us at:</p>
+            <p>
+                <strong>Email:</strong> info@introscale.com<br>
+                <strong>Phone:</strong> +1 415-941-3717 / +91 7016658905
+            </p>
+        </div>
+    </section>
+
+    <footer class="bg-black py-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="text-3xl font-bold mb-8 tracking-tighter border-2 border-white inline-block px-2 py-1">IS</div>
+            
+            <div class="flex justify-center gap-8 mb-8 flex-wrap">
+                <a href="contact-us.html" class="text-gray-400 hover:text-white text-sm">Contact Us</a>
+                <a href="privacy-policy.html" class="text-gray-400 hover:text-white text-sm">Privacy Policy</a>
+                <a href="terms-and-conditions.html" class="text-gray-400 hover:text-white text-sm">Terms & Conditions</a>
+                <a href="refund-policy.html" class="text-gray-400 hover:text-white text-sm">Refund Policy</a>
+            </div>
+            
+            <p class="text-gray-600 text-sm mb-4">&copy; 2025 Introscale. All rights reserved.</p>
+            
+            <p class="text-gray-700 text-xs max-w-2xl mx-auto leading-relaxed">
+                This website is not part of the YouTube, Google, or Facebook website; Google Inc or Facebook Inc. Also, this website is NOT endorsed by YouTube, Google or Facebook in any way.
+            </p>
+        </div>
+    </footer>
 
 </body>
 </html>
-
