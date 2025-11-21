@@ -1,127 +1,176 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Booking Confirmed | Introscale</title>
-  <link rel="icon" type="image/png" href="favicon.png">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmed | Introscale</title>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22black%22/><rect x=%2210%22 y=%2210%22 width=%2280%22 height=%2280%22 fill=%22none%22 stroke=%22white%22 stroke-width=%226%22/><text x=%2250%22 y=%2270%22 font-family=%22sans-serif%22 font-size=%2250%22 font-weight=%22bold%22 fill=%22white%22 text-anchor=%22middle%22>IS</text></svg>">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#050505',
+                            card: '#0f0f0f',
+                            border: '#1f1f1f',
+                            blue: '#3b82f6',
+                            purple: '#8b5cf6'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #000;
+            color: white;
+        }
+        .glass-card {
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
 </head>
-<body class="font-sans text-gray-900 bg-gray-50 flex flex-col min-h-screen">
+<body class="antialiased selection:bg-blue-500 selection:text-white flex flex-col min-h-screen">
 
-  <div class="py-8 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-6">
-      <a href="/" class="flex justify-center">
-        <img src="your-logo.png" alt="Introscale Logo" class="h-10">
-      </a>
-    </div>
-  </div>
-
-  <main class="flex-grow pb-16">
-    <div class="max-w-4xl mx-auto px-6 text-center">
-        <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl animate__animated animate__fadeInUp">
-            <h1 id="main-heading" class="text-4xl md:text-5xl font-extrabold text-blue-600">You're Booked!</h1>
-            <p class="mt-4 text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">
-                Thanks for setting up a time to chat. Please follow these two important steps.
-            </p>
-            <div class="mt-8 text-left max-w-lg mx-auto space-y-6">
-                <div class="flex items-start">
-                    <div class="flex-shrink-0 h-10 w-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold text-xl">1</div>
-                    <div class="ml-4">
-                        <h2 class="text-xl font-bold text-gray-900">Find the email I just sent you.</h2>
-                        <p class="mt-1 text-gray-600">It has the private video link for our meeting and has been sent to <strong id="customer-email">your email address</strong>.
-                            <br><i>(Please check your spam folder if you can't find it!)</i>
-                        </p>
-                    </div>
+    <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-extrabold tracking-tighter text-white">INTROSCALE</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html#problem" class="text-sm font-medium text-gray-300 hover:text-white transition">The Problem</a>
+                    <a href="index.html#solution" class="text-sm font-medium text-gray-300 hover:text-white transition">The Solution</a>
+                    <a href="index.html#process" class="text-sm font-medium text-gray-300 hover:text-white transition">How It Works</a>
+                    <a href="index.html#results" class="text-sm font-medium text-gray-300 hover:text-white transition">Results</a>
                 </div>
-                <div class="flex items-start">
-                    <div class="flex-shrink-0 h-10 w-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold text-xl">2</div>
-                    <div class="ml-4">
-                        <h2 class="text-xl font-bold text-gray-900">Add the meeting to your calendar.</h2>
-                        <p class="mt-1 text-gray-600">This is the most important step so you get a reminder and don't miss our call.</p>
-                    </div>
+                <div>
+                    <a href="https://cal.com/introscale/growthcall" target="_blank" class="bg-white text-black px-5 py-2.5 rounded-full text-sm font-bold hover:bg-gray-200 transition">Book Strategy Call</a>
                 </div>
             </div>
-            <hr class="my-8 border-gray-200">
-            <p class="text-gray-800">
-                That's it! Looking forward to talking soon.
-            </p>
-            
-            <div class="flex flex-col items-center mt-8">
-                <img src="founder-photo.jpg" alt="Aniruddh Solanki" class="h-20 w-20 rounded-full object-cover border-4 border-gray-100">
-                <p class="mt-4 text-xl font-bold text-gray-900">Aniruddh Solanki</p>
-                <p class="text-gray-500">Founder of Introscale</p>
-            </div>
-
         </div>
-    </div>
-  </main>
+    </nav>
 
-          <section id="get-in-touch" class="bg-gray-800 text-white py-12">
-            <div class="max-w-4xl mx-auto px-6 text-center">
-                <h2 class="text-3xl font-bold mb-4">Get in Touch</h2>
-                <p class="text-lg mb-6 text-gray-300">Have a quick question before booking? Feel free to reach out.</p>
-                <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
-                    <a href="mailto:info@introscale.com" class="flex items-center space-x-2 hover:text-sky-400 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-                        <span>info@introscale.com</span>
-                    </a>
-                    <a href="tel:+14159413717" class="flex items-center space-x-2 hover:text-sky-400 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
-                        <span>+1 415 941 3717</span>
-                    </a>
+    <main class="flex-grow pt-32 pb-20 px-4">
+        <div class="max-w-3xl mx-auto">
+            <div class="bg-[#0f0f0f] border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl text-center">
+                
+                <div class="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-8">
+                    <i class="fa-solid fa-check text-4xl text-green-500"></i>
                 </div>
+
+                <h1 id="main-heading" class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">You're Booked!</h1>
+                
+                <p class="text-xl text-gray-400 mb-12 leading-relaxed">
+                    Thanks for setting up a time to chat. Please follow these two important steps.
+                </p>
+
+                <div class="text-left space-y-8 max-w-xl mx-auto mb-12">
+                    <div class="flex gap-6">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-xl border border-blue-400">1</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2">Find the email I just sent you.</h3>
+                            <p class="text-gray-400 leading-relaxed">
+                                It has the private video link for our meeting and has been sent to <strong id="customer-email" class="text-white">your email address</strong>.
+                                <br><span class="text-sm italic text-gray-500">(Please check your spam folder if you can't find it!)</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-6">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-xl border border-blue-400">2</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2">Add the meeting to your calendar.</h3>
+                            <p class="text-gray-400 leading-relaxed">
+                                This is the most important step so you get a reminder and don't miss our call.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="h-px w-full bg-white/10 mb-8"></div>
+
+                <p class="text-lg text-gray-300 mb-8">That's it! Looking forward to talking soon.</p>
+
+                <div class="flex flex-col items-center">
+                    <img src="founder-photo.jpg" alt="Aniruddh Solanki" class="w-24 h-24 rounded-full object-cover border-4 border-[#1f1f1f] shadow-lg mb-4">
+                    <p class="text-xl font-bold text-white">Aniruddh Solanki</p>
+                    <p class="text-sm text-gray-500 uppercase tracking-widest">Founder of Introscale</p>
+                </div>
+
             </div>
-        </section>
+        </div>
     </main>
 
-    <footer class="py-12 bg-black text-neutral-400">
-        <div class="container mx-auto px-6 text-center">
-            <img src="your-logo.png" alt="Introscale Logo" class="h-8 mx-auto mb-4" 
-                 onerror="this.src='https://placehold.co/120x32/171717/FFFFFF?text=Introscale&font=inter'; this.onerror=null;">
-            <p>&copy; 2025 Introscale. All rights reserved.</p>
-            <p class="text-sm mt-2">This website is not part of the YouTube, Google, or Facebook website; Google Inc or Facebook Inc.
-Also, this website is NOT endorsed by YouTube, Google or Facebook in any way. FACEBOOK is a trademark of FACEBOOK Inc. YOUTUBE is a trademark of GOOGLE Inc. </p>
-            <div class="mt-4 space-x-4 text-sm">
-                <a href="https://introscale.com/privacy-policy" target="_blank" rel="noopener noreferrer" class="hover:text-white">Privacy Policy</a>
-                <span class="text-neutral-500">&bull;</span>
-                <a href="https://introscale.com/terms-and-conditions" target="_blank" rel="noopener noreferrer" class="hover:text-white">Terms & Conditions</a>
+    <section class="py-12 bg-brand-dark border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6">Get in Touch</h2>
+            <p class="text-gray-400 mb-8">Have a quick question before booking? Feel free to reach out.</p>
+            
+            <div class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16">
+                <a href="mailto:info@introscale.com" class="flex items-center gap-3 text-lg hover:text-blue-400 transition text-gray-300">
+                    <i class="fa-regular fa-envelope text-xl"></i>
+                    info@introscale.com
+                </a>
+                <a href="tel:+14159413717" class="flex items-center gap-3 text-lg hover:text-blue-400 transition text-gray-300">
+                    <i class="fa-solid fa-phone text-xl"></i>
+                    +1 415 941 3717
+                </a>
             </div>
         </div>
+    </section>
+
+    <footer class="bg-black py-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="text-3xl font-bold mb-8 tracking-tighter border-2 border-white inline-block px-2 py-1">IS</div>
+            
+            <div class="flex justify-center gap-8 mb-8 flex-wrap">
+                <a href="contact-us.html" class="text-gray-400 hover:text-white text-sm">Contact Us</a>
+                <a href="privacy-policy.html" class="text-gray-400 hover:text-white text-sm">Privacy Policy</a>
+                <a href="terms-and-conditions.html" class="text-gray-400 hover:text-white text-sm">Terms & Conditions</a>
+                <a href="refund-policy.html" class="text-gray-400 hover:text-white text-sm">Refund Policy</a>
+            </div>
+            
+            <p class="text-gray-600 text-sm mb-4">&copy; 2025 Introscale. All rights reserved.</p>
+            
+            <p class="text-gray-700 text-xs max-w-2xl mx-auto leading-relaxed">
+                This website is not part of the YouTube, Google, or Facebook website; Google Inc or Facebook Inc. Also, this website is NOT endorsed by YouTube, Google or Facebook in any way.
+            </p>
+        </div>
     </footer>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        // Corrected to use 'attendeeName' from the Cal.com URL
-        const name = urlParams.get('attendeeName'); 
-        const email = urlParams.get('email');
 
-        const headingElement = document.getElementById('main-heading');
-        const emailElement = document.getElementById('customer-email');
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const name = urlParams.get('attendeeName'); 
+            const email = urlParams.get('email');
 
-        // Only update the heading if a name is present in the URL
-        if (name) {
-            const firstName = name.split(' ')[0]; // Get first name
-            headingElement.innerHTML = `You're Booked, ${firstName}!`;
-        }
+            const headingElement = document.getElementById('main-heading');
+            const emailElement = document.getElementById('customer-email');
 
-        // Only update the email if it's present in the URL
-        if (email) {
-            emailElement.textContent = email;
-        }
-    });
-  </script>
+            if (name) {
+                const firstName = name.split(' ')[0];
+                headingElement.innerHTML = `You're Booked, ${firstName}!`;
+            }
+
+            if (email) {
+                emailElement.textContent = email;
+            }
+        });
+    </script>
 
 </body>
 </html>
-
-
