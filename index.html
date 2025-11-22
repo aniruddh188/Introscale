@@ -525,8 +525,8 @@
         ];
 
         function createCard(review) {
-            // Added loading="eager" for LCP improvement on desktop scroll
-            // Removed star rating and time/date
+            // Added loading="eager" for LCP improvement
+            // Removed blue tick logic - now unconditional blue tick for everyone
             return `
                 <div class="w-full sm:w-[400px] bg-[#0f0f0f] border border-white/10 rounded-2xl p-6 flex-shrink-0 select-none">
                     <div class="flex justify-between items-start mb-4">
@@ -535,7 +535,7 @@
                             <div>
                                 <h3 class="text-white font-bold text-sm flex items-center gap-1">
                                     ${review.company} 
-                                    ${review.verified ? '<i class="fa-solid fa-circle-check text-blue-500 text-xs"></i>' : ''}
+                                    <i class="fa-solid fa-circle-check text-blue-500 text-xs"></i>
                                 </h3>
                             </div>
                         </div>
