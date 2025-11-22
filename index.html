@@ -60,9 +60,9 @@
         }
 
         .glass-card {
-            background: rgba(20, 20, 20, 0.6);
+            background: rgba(10, 10, 10, 0.8); 
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .glow-card {
@@ -70,9 +70,62 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 0 60px -15px rgba(59, 130, 246, 0.3), 0 0 60px -15px rgba(139, 92, 246, 0.3);
         }
+
+        /* --- Glowing Lines Grid System --- */
+        .bg-fixed-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -10;
+            pointer-events: none;
+            background-color: #000;
+            overflow: hidden;
+        }
+
+        .grid-base {
+            position: absolute;
+            inset: 0;
+            background-size: 60px 60px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.05) 2px, transparent 2px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 2px, transparent 2px);
+        }
+
+        .grid-glow {
+            position: absolute;
+            inset: 0;
+            background-size: 60px 60px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.4) 2px, transparent 2px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 2px, transparent 2px);
+            mask-image: radial-gradient(300px circle at var(--x, -100px) var(--y, -100px), black, transparent);
+            -webkit-mask-image: radial-gradient(300px circle at var(--x, -100px) var(--y, -100px), black, transparent);
+        }
+
+        /* Custom FAQ Accordion Styles */
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        details[open] summary ~ * {
+            animation: slideDown 0.2s ease-in-out;
+        }
+        @keyframes slideDown {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-blue-500 selection:text-white">
+
+    <div class="bg-fixed-container">
+        <div class="grid-base"></div>
+        <div class="grid-glow" id="glow-layer"></div>
+    </div>
 
     <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -83,6 +136,7 @@
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#problem" class="text-sm font-medium text-gray-300 hover:text-white transition">The Problem</a>
                     <a href="#solution" class="text-sm font-medium text-gray-300 hover:text-white transition">The Solution</a>
+                    <a href="#comparison" class="text-sm font-medium text-gray-300 hover:text-white transition">Why Us?</a>
                     <a href="#process" class="text-sm font-medium text-gray-300 hover:text-white transition">How It Works</a>
                     <a href="#results" class="text-sm font-medium text-gray-300 hover:text-white transition">Results</a>
                 </div>
@@ -108,7 +162,7 @@
             </h1>
             
             <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed px-4">
-                We help pressure washing businesses get an extra predictable flow of qualified, booked estimates to their calendar within 30 days.
+                We help pressure washing businesses get an extra predictable flow of qualified, booked estimate requests to their calendar within 30 days.
             </p>
             
             <div class="flex flex-col sm:flex-row justify-center items-center gap-6 mb-8">
@@ -135,8 +189,8 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 
                 <div class="text-center lg:text-left">
-                    <p class="text-blue-500 font-semibold text-xs tracking-wider mb-2">THE PROBLEM</p>
-                    <h2 class="text-2xl md:text-3xl font-bold mb-4">Stuck in the "Technician's Trap"?</h2>
+                    <p class="text-red-500 font-semibold text-xs tracking-wider mb-2">THE PROBLEM</p>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4"><span class="gradient-text">Stuck in the "Technician's Trap"?</span></h2>
                     <p class="text-gray-400 text-sm mb-6 leading-relaxed">
                         Most owners are busy on the truck or chasing the next job. This "feast or famine" cycle kills growth.
                     </p>
@@ -174,7 +228,7 @@
 
                 <div id="solution" class="glow-card rounded-2xl p-6 md:p-8 relative overflow-hidden text-center lg:text-left">
                     <p class="text-green-500 font-semibold text-xs tracking-wider mb-2">THE SOLUTION</p>
-                    <h2 class="text-2xl md:text-3xl font-bold mb-4">Performance Partnership</h2>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4"><span class="gradient-text">Performance Partnership</span></h2>
                     <p class="text-gray-400 text-sm mb-6 leading-relaxed">
                         A complete system that puts confirmed, qualified appointments directly into your calendar.
                     </p>
@@ -183,16 +237,16 @@
                         <div class="bg-white/5 border border-white/10 p-4 rounded-xl">
                             <div class="text-blue-400 text-xl mb-2"><i class="fa-solid fa-arrow-trend-up"></i></div>
                             <h3 class="font-bold text-sm text-white mb-1">Guaranteed Results</h3>
-                            <p class="text-xs text-gray-400">Booked estimates, not just leads.</p>
+                            <p class="text-xs text-gray-400">We deliver confirmed, qualified booked estimate requests directly to your calendar, not just raw leads.</p>
                         </div>
                         <div class="bg-white/5 border border-white/10 p-4 rounded-xl">
-                            <div class="text-purple-400 text-xl mb-2"><i class="fa-regular fa-clock"></i></div>
-                            <h3 class="font-bold text-sm text-white mb-1">30 Day Sprint</h3>
-                            <p class="text-xs text-gray-400">See results in the first month.</p>
+                            <div class="text-purple-400 text-xl mb-2"><i class="fa-solid fa-building-columns"></i></div>
+                            <h3 class="font-bold text-sm text-white mb-1">Long-Term Foundation</h3>
+                            <p class="text-xs text-gray-400">We build sustainable brand growth that lasts years, not just a few weeks like most agencies.</p>
                         </div>
                     </div>
 
-                   <div class="gradient-btn w-full p-4 rounded-xl flex justify-between items-center text-left">
+                    <div class="gradient-btn w-full p-4 rounded-xl flex justify-between items-center text-left">
                         <div>
                             <h3 class="text-lg font-bold text-white">0% Risk Guarantee</h3>
                             <p class="text-white/80 text-xs mt-0.5">We hit our numbers or you get your money back.</p>
@@ -205,10 +259,42 @@
         </div>
     </section>
 
-    <section id="process" class="py-20 bg-black">
+    <section id="comparison" class="py-20">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-5xl font-bold mb-12 tracking-tight"><span class="gradient-text">What makes us stand out in the industry</span></h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <div class="p-8 rounded-3xl border border-white/5 bg-white/5 text-left relative overflow-hidden opacity-70 hover:opacity-100 transition duration-300">
+                    <h3 class="text-2xl font-bold text-gray-400 mb-6">Other Agencies</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3 text-gray-400"><div class="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 text-xs"><i class="fa-solid fa-xmark"></i></div> Shared, low-quality leads</li>
+                        <li class="flex items-center gap-3 text-gray-400"><div class="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 text-xs"><i class="fa-solid fa-xmark"></i></div> Long 6-12 month contracts</li>
+                        <li class="flex items-center gap-3 text-gray-400"><div class="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 text-xs"><i class="fa-solid fa-xmark"></i></div> No guarantees (you pay regardless)</li>
+                        <li class="flex items-center gap-3 text-gray-400"><div class="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 text-xs"><i class="fa-solid fa-xmark"></i></div> Manual follow-up required</li>
+                        <li class="flex items-center gap-3 text-gray-400"><div class="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 text-xs"><i class="fa-solid fa-xmark"></i></div> Generic marketing strategies</li>
+                    </ul>
+                </div>
+
+                <div class="p-8 rounded-3xl border border-blue-500/30 bg-blue-900/10 backdrop-blur-md text-left relative overflow-hidden shadow-[0_0_50px_-12px_rgba(59,130,246,0.3)] scale-105 z-10">
+                    <h3 class="text-2xl font-bold text-white mb-6">Introscale</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3 text-white"><div class="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 text-xs"><i class="fa-solid fa-check"></i></div> 100% Exclusive Booked Estimate Requests</li>
+                        <li class="flex items-center gap-3 text-white"><div class="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 text-xs"><i class="fa-solid fa-check"></i></div> No lock-in (Month-to-Month)</li>
+                        <li class="flex items-center gap-3 text-white"><div class="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 text-xs"><i class="fa-solid fa-check"></i></div> 0% Risk (Guaranteed Results)</li>
+                        <li class="flex items-center gap-3 text-white"><div class="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 text-xs"><i class="fa-solid fa-check"></i></div> Fully Automated AI Nurture</li>
+                        <li class="flex items-center gap-3 text-white"><div class="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 text-xs"><i class="fa-solid fa-check"></i></div> Custom-Built Foundations</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="process" class="py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-4xl font-bold mb-4">The Introscale Engine</h2>
+                <h2 class="text-4xl font-bold mb-4"><span class="gradient-text">The Introscale Engine</span></h2>
                 <p class="text-gray-400">Our entire process is automated. You only get involved when a new appointment appears.</p>
             </div>
 
@@ -219,7 +305,7 @@
                     </div>
                     <p class="text-xs font-bold text-blue-500 uppercase tracking-wider mb-2">Step 01</p>
                     <h3 class="text-xl font-bold mb-3">Hyper-Local Targeting</h3>
-                    <p class="text-sm text-gray-400 leading-relaxed">We launch ad campaigns (Facebook, Google) in a 10-15 mile radius of your service area.</p>
+                    <p class="text-sm text-gray-400 leading-relaxed">We launch campaigns to generate leads in a 10-15 mile radius of your service area.</p>
                 </div>
 
                 <div class="glass-card p-8 rounded-2xl hover:border-blue-500/50 transition duration-300 group">
@@ -252,9 +338,9 @@
         </div>
     </section>
 
-    <section id="results" class="py-20 bg-brand-dark overflow-hidden">
+    <section id="results" class="py-20 overflow-hidden">
         <div class="text-center max-w-3xl mx-auto mb-12 px-4">
-            <h2 class="text-4xl md:text-5xl font-bold mb-4">Real Results</h2>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4"><span class="gradient-text">Real Results</span></h2>
             <p class="text-gray-400 text-lg mb-8">Hear from pressure washing owners just like you who are no longer stuck in the "Technician's Trap."</p>
             
             <div class="inline-flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full border border-white/10">
@@ -267,8 +353,8 @@
         </div>
 
         <div class="hidden md:block relative w-full">
-            <div class="absolute left-0 top-0 h-full w-40 bg-gradient-to-r from-brand-dark to-transparent z-10 pointer-events-none"></div>
-            <div class="absolute right-0 top-0 h-full w-40 bg-gradient-to-l from-brand-dark to-transparent z-10 pointer-events-none"></div>
+            <div class="absolute left-0 top-0 h-full w-40 bg-gradient-to-r from-black/20 to-transparent z-10 pointer-events-none"></div>
+            <div class="absolute right-0 top-0 h-full w-40 bg-gradient-to-l from-black/20 to-transparent z-10 pointer-events-none"></div>
 
             <div class="flex gap-6 w-max animate-scroll pointer-events-none">
                 <div class="flex gap-6" id="review-set-1"></div>
@@ -287,11 +373,11 @@
             </div>
 
             <h2 class="text-3xl md:text-5xl font-bold mb-4 leading-tight">
-                0% Risk.<br>100% Results.
+                <span class="gradient-text">0% Risk.<br>100% Results.</span>
             </h2>
             
             <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-6">
-                If we don't hit our promised estimates in the first 30 days, we'll refund your service fee. The risk is entirely on us.
+                If we don't hit our promised booked estimate requests, we'll refund your service fee. The risk is entirely on us.
             </p>
             
             <a href="calendar.html" class="inline-block bg-white text-black text-base md:text-lg font-bold px-6 py-3 md:px-8 md:py-3 rounded-full hover:scale-105 transition shadow-[0_0_30px_rgba(255,255,255,0.3)] whitespace-nowrap">
@@ -306,9 +392,75 @@
         </div>
     </section>
 
-    <section class="py-8 bg-brand-dark">
+    <section id="faq" class="py-20">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4"><span class="gradient-text">Everything You Need To Know</span></h2>
+            </div>
+
+            <div class="space-y-4">
+                <div class="glass-card rounded-2xl overflow-hidden">
+                    <details class="group">
+                        <summary class="flex justify-between items-center cursor-pointer p-6 list-none">
+                            <span class="text-lg font-bold text-white">How does pricing work?</span>
+                            <span class="transition group-open:rotate-180">
+                                <i class="fa-solid fa-chevron-down text-blue-500"></i>
+                            </span>
+                        </summary>
+                        <div class="text-gray-400 px-6 pb-6 leading-relaxed border-t border-white/5 pt-4">
+                            We operate on a performance-first model designed for ROI. While we have a standard service fee to cover the build-out and management, our primary focus is delivering value. Since every service area varies in competition and volume, we calculate a custom pricing structure on our strategy call to ensure it makes financial sense for your specific margins.
+                        </div>
+                    </details>
+                </div>
+
+                <div class="glass-card rounded-2xl overflow-hidden">
+                    <details class="group">
+                        <summary class="flex justify-between items-center cursor-pointer p-6 list-none">
+                            <span class="text-lg font-bold text-white">I've been burned by agencies. Why are you different?</span>
+                            <span class="transition group-open:rotate-180">
+                                <i class="fa-solid fa-chevron-down text-blue-500"></i>
+                            </span>
+                        </summary>
+                        <div class="text-gray-400 px-6 pb-6 leading-relaxed border-t border-white/5 pt-4">
+                            We hate the "agency" label too. Most sell you shared leads and disappear. We function as a growth partner, installing a complete booked-appointment engine into your business. With our month-to-month structure and performance guarantee, we are financially motivated to keep winning for you every single month, or we lose your business.
+                        </div>
+                    </details>
+                </div>
+
+                <div class="glass-card rounded-2xl overflow-hidden">
+                    <details class="group">
+                        <summary class="flex justify-between items-center cursor-pointer p-6 list-none">
+                            <span class="text-lg font-bold text-white">My business is unique. Will this work for me?</span>
+                            <span class="transition group-open:rotate-180">
+                                <i class="fa-solid fa-chevron-down text-blue-500"></i>
+                            </span>
+                        </summary>
+                        <div class="text-gray-400 px-6 pb-6 leading-relaxed border-t border-white/5 pt-4">
+                            While the core mechanism of our engine is proven across the country, the fuel we put in is custom to you. We adjust targeting, ad copy, and qualification scripts to fit your specific services (e.g., roof wash vs. concrete), pricing model, and crew capacity. We don't force a square peg into a round hole; we build the system around your reality.
+                        </div>
+                    </details>
+                </div>
+
+                <div class="glass-card rounded-2xl overflow-hidden">
+                    <details class="group">
+                        <summary class="flex justify-between items-center cursor-pointer p-6 list-none">
+                            <span class="text-lg font-bold text-white">Do you really offer a guarantee?</span>
+                            <span class="transition group-open:rotate-180">
+                                <i class="fa-solid fa-chevron-down text-blue-500"></i>
+                            </span>
+                        </summary>
+                        <div class="text-gray-400 px-6 pb-6 leading-relaxed border-t border-white/5 pt-4">
+                            Yes. It’s simple: We promise a minimum number of qualified booked estimate requests. If we don't hit that number, you don't pay for our service. We refund your service fee, and you keep any bookings we did generate for free. This removes your risk and puts the burden of performance entirely on our shoulders.
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-8">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6">Get in Touch</h2>
+            <h2 class="text-3xl md:text-4xl font-bold mb-6"><span class="gradient-text">Get in Touch</span></h2>
             <p class="text-gray-400 text-lg mb-8">Have a quick question before booking? Feel free to reach out.</p>
             
             <div class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16">
@@ -326,9 +478,10 @@
 
     <footer class="bg-black py-12 border-t border-white/10">
         <div class="max-w-7xl mx-auto px-4 text-center">
-<a href="index.html" class="inline-block mb-8">
-                <img src="favicon.svg" alt="Introscale Logo" class="w-12 h-12 mx-auto">
-            </a>            
+            <a href="index.html" class="inline-block mb-8">
+                <img src="favicon.svg" alt="Introscale Logo" class="w-24 h-24 mx-auto">
+            </a>
+            
             <div class="flex justify-center gap-8 mb-8 flex-wrap">
                 <a href="contact-us.html" class="text-gray-400 hover:text-white text-sm">Contact Us</a>
                 <a href="privacy-policy.html" class="text-gray-400 hover:text-white text-sm">Privacy Policy</a>
@@ -345,8 +498,19 @@
     </footer>
 
     <script>
+        // Mouse Glow Logic
+        document.addEventListener('mousemove', (e) => {
+            const glowLayer = document.getElementById('glow-layer');
+            if (glowLayer) {
+                // Pass cursor coordinates to CSS
+                glowLayer.style.setProperty('--x', `${e.clientX}px`);
+                glowLayer.style.setProperty('--y', `${e.clientY}px`);
+            }
+        });
+
+        // Review Data & Logic
         const reviews = [
-            { company: "Fresh Wash Co.", logoImg: "logos/fresh-wash-co.png", time: "1 month ago", quote: "I was skeptical of the promise, but we got 19 booked appointments in the first 30 days. This is the real deal.", name: "Ethan Thomas", profileImg: "logos/owner1.png", role: "Business Owner", verified: true },
+            { company: "Fresh Wash Co.", logoImg: "logos/fresh-wash-co.png", time: "1 month ago", quote: "I was skeptical of the promise, but we got 19 booked estimate requests in the first 30 days. This is the real deal.", name: "Ethan Thomas", profileImg: "logos/owner1.png", role: "Business Owner", verified: true },
             { company: "Crystal Clean Wash", logoImg: "logos/crystal-clean-wash.png", time: "2 months ago", quote: "The quality of the jobs is what impressed me most. We're getting high-ticket clients who are ready to buy, not price shoppers.", name: "Matthew Lewis", profileImg: "logos/owner2.png", role: "Owner, Crystal Clean Wash", verified: true },
             { company: "Diamond Clean", logoImg: "logos/diamond-clean.png", time: "3 months ago", quote: "The feast-or-famine cycle is over. Having a consistent $5,000+ in extra revenue each month has brought incredible financial stability.", name: "Jacob Phillips", profileImg: "logos/owner3.png", role: "Owner, Diamond Clean", verified: false },
             { company: "Pristine Power Wash", logoImg: "logos/pristine-power-wash.png", time: "8 months ago", quote: "The process is completely hands-off. We got 12 new clients in the first month without lifting a finger. A total game changer.", name: "Samuel Peterson", profileImg: "logos/owner4.png", role: "Business Owner", verified: true },
@@ -361,6 +525,8 @@
         ];
 
         function createCard(review) {
+            // Updated Card Width: w-full sm:w-[400px]
+            // This ensures it takes full width on mobile (within its container) and fixed width on desktop scrolling
             return `
                 <div class="w-full sm:w-[400px] bg-[#0f0f0f] border border-white/10 rounded-2xl p-6 flex-shrink-0 select-none">
                     <div class="flex justify-between items-start mb-4">
@@ -396,8 +562,11 @@
         
         const cardsHTML = reviews.map(createCard).join('');
         
+        // Inject into Desktop Scrolling sets
         if(set1) set1.innerHTML = cardsHTML;
         if(set2) set2.innerHTML = cardsHTML;
+        
+        // Inject into Mobile Stacked set
         if(mobileSet) mobileSet.innerHTML = cardsHTML;
     </script>
 </body>
