@@ -524,31 +524,28 @@
             { company: "ProShine Services", logoImg: "logos/proshine-services.png", time: "last year", quote: "I've gotten back 10+ hours a week because I no longer have to chase dead-end leads. I just wake up to confirmed bookings.", name: "Kevin Peterson", profileImg: "logos/owner12.png", role: "Owner, ProShine Services", verified: false }
         ];
 
-        function createCard(review) {
-            // Added loading="eager" to ensure images load in the scrolling marquee
+       function createCard(review) {
+            // Added loading="eager" for LCP improvement on desktop scroll
+            // Removed star rating and time/date
             return `
                 <div class="w-full sm:w-[400px] bg-[#0f0f0f] border border-white/10 rounded-2xl p-6 flex-shrink-0 select-none">
                     <div class="flex justify-between items-start mb-4">
                         <div class="flex items-center gap-3">
-                            <img src="${review.logoImg}" loading="eager" alt="${review.company} Logo" class="w-10 h-10 rounded-full object-cover bg-white/10">
+                            <img src="${review.logoImg}" loading="eager" alt="${review.company} Logo" width="40" height="40" class="w-10 h-10 rounded-full object-cover bg-white/10">
                             <div>
-                                <h4 class="text-white font-bold text-sm flex items-center gap-1">
+                                <h3 class="text-white font-bold text-sm flex items-center gap-1">
                                     ${review.company} 
                                     ${review.verified ? '<i class="fa-solid fa-circle-check text-blue-500 text-xs"></i>' : ''}
-                                </h4>
-                                <div class="flex text-yellow-500 text-xs mt-0.5">
-                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                                </div>
+                                </h3>
                             </div>
                         </div>
-                        <span class="text-xs text-gray-500">${review.time}</span>
                     </div>
                     <p class="text-gray-300 text-sm italic mb-6 leading-relaxed">"${review.quote}"</p>
                     <div class="flex items-center gap-3 pt-4 border-t border-white/5">
-                        <img src="${review.profileImg}" loading="eager" alt="${review.name}" class="w-8 h-8 rounded-full object-cover bg-gray-800">
+                        <img src="${review.profileImg}" loading="eager" alt="${review.name}" width="32" height="32" class="w-8 h-8 rounded-full object-cover bg-gray-800">
                         <div>
                             <p class="text-white font-bold text-xs">${review.name}</p>
-                            <p class="text-gray-500 text-[10px] uppercase tracking-wide">${review.role}</p>
+                            <p class="text-gray-400 text-[10px] uppercase tracking-wide">${review.role}</p>
                         </div>
                     </div>
                 </div>
