@@ -524,7 +524,7 @@
             { company: "ProShine Services", logoImg: "logos/proshine-services.png", time: "last year", quote: "I've gotten back 10+ hours a week because I no longer have to chase dead-end leads. I just wake up to confirmed bookings.", name: "Kevin Peterson", profileImg: "logos/owner12.png", role: "Owner, ProShine Services", verified: false }
         ];
 
-       function createCard(review) {
+        function createCard(review) {
             // Added loading="eager" for LCP improvement on desktop scroll
             // Removed star rating and time/date
             return `
@@ -558,8 +558,11 @@
         
         const cardsHTML = reviews.map(createCard).join('');
         
+        // Inject into Desktop Scrolling sets
         if(set1) set1.innerHTML = cardsHTML;
         if(set2) set2.innerHTML = cardsHTML;
+        
+        // Inject into Mobile Stacked set
         if(mobileSet) mobileSet.innerHTML = cardsHTML;
     </script>
 </body>
