@@ -8,8 +8,12 @@
     <link rel="icon" type="image/png" href="favicon.png">
     
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -17,20 +21,28 @@
                 extend: {
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
                     },
                     colors: {
                         brand: {
-                            dark: '#050505',
-                            card: '#0f0f0f',
-                            border: '#1f1f1f',
-                            blue: '#3b82f6',
-                            purple: '#8b5cf6'
+                            navy: '#0B1120',    /* Deepest Navy */
+                            slate: '#334155',   /* Soft Dark */
+                            teal: '#06b6d4',    /* Bright Teal */
+                            blue: '#3b82f6',    /* Vivid Blue */
+                            surface: '#f0f9ff', /* Sky Mist Surface */
                         }
                     },
                     animation: {
-                        'scroll': 'scroll 240s linear infinite',
+                        'blob': 'blob 7s infinite',
+                        'scroll': 'scroll 120s linear infinite',
                     },
                     keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
                         scroll: {
                             '0%': { transform: 'translateX(0)' },
                             '100%': { transform: 'translateX(-50%)' },
@@ -42,148 +54,143 @@
     </script>
     <style>
         body {
-            background-color: #000;
-            color: white;
+            background-color: #f0f9ff;
+            color: #0f172a;
+            overflow-x: hidden;
         }
         /* Hide scrollbar */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
+        /* Gradient Text */
         .gradient-text {
-            background: linear-gradient(to right, #60a5fa, #c084fc);
+            background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            padding-bottom: 0.15em;
         }
         
-        .gradient-btn {
-            background: linear-gradient(to right, #3b82f6, #9333ea);
+        /* Button Style */
+        .btn-primary {
+            background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+            color: white;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
         }
-
-        .glass-card {
-            background: rgba(10, 10, 10, 0.8); 
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .glow-card {
-            background-color: #0f0f0f;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 60px -15px rgba(59, 130, 246, 0.3), 0 0 60px -15px rgba(139, 92, 246, 0.3);
-        }
-
-        /* --- Glowing Lines Grid System --- */
-        .bg-fixed-container {
-            position: fixed;
+        .btn-primary::before {
+            content: '';
+            position: absolute;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -10;
-            pointer-events: none;
-            background-color: #000;
-            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+            z-index: -1;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+        .btn-primary:hover::before {
+            opacity: 1;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.4);
         }
 
-        .grid-base {
+        /* Glass Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Blobs */
+        .blob {
             position: absolute;
-            inset: 0;
-            background-size: 60px 60px;
-            background-image: 
-                linear-gradient(to right, rgba(255, 255, 255, 0.05) 2px, transparent 2px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 2px, transparent 2px);
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.6;
+            animation: blob 10s infinite;
         }
 
-        .grid-glow {
-            position: absolute;
-            inset: 0;
-            background-size: 60px 60px;
-            background-image: 
-                linear-gradient(to right, rgba(255, 255, 255, 0.4) 2px, transparent 2px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 2px, transparent 2px);
-            mask-image: radial-gradient(300px circle at var(--x, -100px) var(--y, -100px), black, transparent);
-            -webkit-mask-image: radial-gradient(300px circle at var(--x, -100px) var(--y, -100px), black, transparent);
-        }
-
-        /* Custom FAQ Accordion Styles */
-        details > summary {
-            list-style: none;
-        }
-        details > summary::-webkit-details-marker {
-            display: none;
-        }
-        details[open] summary ~ * {
-            animation: slideDown 0.2s ease-in-out;
-        }
+        /* FAQ Animation */
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        details[open] summary ~ * { animation: slideDown 0.2s ease-in-out; }
         @keyframes slideDown {
             0% { opacity: 0; transform: translateY(-10px); }
             100% { opacity: 1; transform: translateY(0); }
         }
     </style>
-    <!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1332380321025660');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1332380321025660&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-</head>
-<body class="antialiased selection:bg-blue-500 selection:text-white">
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1332380321025660');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1332380321025660&ev=PageView&noscript=1"
+    /></noscript>
+    </head>
+<body class="antialiased selection:bg-brand-teal selection:text-white">
 
-    <div class="bg-fixed-container">
-        <div class="grid-base"></div>
-        <div class="grid-glow" id="glow-layer"></div>
+    <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10 hidden md:block">
+        <div class="blob bg-brand-teal w-96 h-96 rounded-full top-0 left-0 mix-blend-multiply opacity-20 animate-blob"></div>
+        <div class="blob bg-brand-blue w-96 h-96 rounded-full top-0 right-0 mix-blend-multiply opacity-20 animate-blob" style="animation-delay: 2s"></div>
+        <div class="blob bg-purple-300 w-96 h-96 rounded-full -bottom-32 left-20 mix-blend-multiply opacity-20 animate-blob" style="animation-delay: 4s"></div>
     </div>
 
-    <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-md">
+    <nav class="fixed w-full z-50 bg-[#f0f9ff]/90 backdrop-blur-md border-b border-white/50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <a href="index.html" class="flex-shrink-0 flex items-center">
-                    <span class="text-2xl font-extrabold tracking-tighter text-white">INTROSCALE</span>
+                <a href="index.html" class="flex-shrink-0 flex items-center group">
+                    <span class="text-2xl font-extrabold tracking-tighter text-brand-navy group-hover:opacity-80 transition">INTROSCALE</span>
                 </a>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#problem" class="text-sm font-medium text-gray-300 hover:text-white transition">The Problem</a>
-                    <a href="#solution" class="text-sm font-medium text-gray-300 hover:text-white transition">The Solution</a>
-                    <a href="#comparison" class="text-sm font-medium text-gray-300 hover:text-white transition">Why Us?</a>
-                    <a href="#process" class="text-sm font-medium text-gray-300 hover:text-white transition">How It Works</a>
-                    <a href="#results" class="text-sm font-medium text-gray-300 hover:text-white transition">Results</a>
+                    <a href="#problem" class="text-sm font-medium text-slate-600 hover:text-brand-blue transition">The Problem</a>
+                    <a href="#solution" class="text-sm font-medium text-slate-600 hover:text-brand-blue transition">The Solution</a>
+                    <a href="#comparison" class="text-sm font-medium text-slate-600 hover:text-brand-blue transition">Why Us?</a>
+                    <a href="#process" class="text-sm font-medium text-slate-600 hover:text-brand-blue transition">How It Works</a>
+                    <a href="#results" class="text-sm font-medium text-slate-600 hover:text-brand-blue transition">Results</a>
                 </div>
                 <div>
-                    <a href="calendar.html" class="bg-white text-black px-5 py-2.5 rounded-full text-sm font-bold hover:bg-gray-200 transition">Book Strategy Call</a>
+                    <a href="calendar.html" class="btn-primary px-5 py-2.5 rounded-full text-sm font-bold shadow-lg shadow-brand-teal/30 hover:shadow-2xl hover:shadow-brand-teal/40 transform transition hover:-translate-y-1 inline-block">Book Strategy Call</a>
                 </div>
             </div>
         </div>
     </nav>
 
     <section class="relative pt-32 pb-8 md:pb-20 lg:pt-40 overflow-hidden">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-blue-900/20 rounded-full blur-[100px] -z-10"></div>
-
+        
         <div class="max-w-4xl mx-auto text-center px-1 sm:px-4">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-green-400 mb-6">
+            <div data-aos="fade-down" data-aos-delay="100" class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/50 bg-white/80 text-xs font-medium text-green-600 mb-6 shadow-sm hover:border-green-500 transition cursor-default">
                 <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
                 Accepting New Partners for Q1
             </div>
             
-            <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter leading-none mb-6">
+            <h1 data-aos="fade-up" data-aos-delay="200" class="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter leading-none mb-6 text-brand-navy">
                 Your Predictable <br>
                 <span class="gradient-text">Job Flow Engine</span>
             </h1>
             
-            <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed px-4">
+            <p data-aos="fade-up" data-aos-delay="300" class="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto mb-10 leading-relaxed px-4">
                 We help pressure washing businesses get an extra predictable flow of qualified, booked estimate requests to their calendar within 30 days.
             </p>
             
-            <div class="flex flex-col sm:flex-row justify-center items-center gap-6 mb-8">
-                <a href="calendar.html" class="bg-white text-black text-lg font-bold px-8 py-4 rounded-full hover:bg-gray-200 transition w-full sm:w-auto whitespace-nowrap">
+            <div data-aos="fade-up" data-aos-delay="400" class="flex flex-col sm:flex-row justify-center items-center gap-6 mb-8">
+                <a href="calendar.html" class="btn-primary text-lg font-bold px-8 py-4 rounded-full w-full sm:w-auto whitespace-nowrap shadow-xl shadow-brand-teal/30">
                     Book Strategy Call <i class="fa-solid fa-arrow-right ml-2"></i>
                 </a>
 
@@ -195,47 +202,47 @@ src="https://www.facebook.com/tr?id=1332380321025660&ev=PageView&noscript=1"
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
                     </div>
-                    <span class="text-gray-400 text-sm font-medium whitespace-nowrap">20+ owners trust us</span>
+                    <span class="text-slate-500 text-sm font-medium whitespace-nowrap">20+ owners trust us</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="problem" class="py-8 md:py-12 bg-brand-dark">
+    <section id="problem" class="py-8 md:py-12 bg-brand-navy text-white">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 
-                <div class="text-center lg:text-left">
-                    <p class="text-red-500 font-semibold text-xs tracking-wider mb-2">THE PROBLEM</p>
-                    <h2 class="text-2xl md:text-3xl font-bold mb-4"><span class="gradient-text">Stuck in the "Technician's Trap"?</span></h2>
+                <div class="text-left" data-aos="fade-right">
+                    <p class="text-red-400 font-semibold text-xs tracking-wider mb-2">THE PROBLEM</p>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4">Stuck in the <span class="gradient-text">"Technician's Trap"?</span></h2>
                     <p class="text-gray-400 text-sm mb-6 leading-relaxed">
                         Most owners are busy on the truck or chasing the next job. This "feast or famine" cycle kills growth.
                     </p>
                     
-                    <div class="space-y-3 text-left">
-                        <div class="glass-card p-3 rounded-lg border-l-4 border-l-red-500/50 flex gap-3 items-center">
+                    <div class="space-y-3">
+                        <div class="flex gap-3 items-center justify-start bg-white/5 p-3 rounded-lg border-l-4 border-l-red-500/50">
                             <div class="w-8 h-8 rounded-md bg-red-500/10 flex items-center justify-center flex-shrink-0 text-red-500 text-sm">
                                 <i class="fa-solid fa-triangle-exclamation"></i>
                             </div>
-                            <div>
+                            <div class="text-left">
                                 <h3 class="font-bold text-white text-sm">Unpredictable Revenue</h3>
                                 <p class="text-xs text-gray-400">Never knowing where the next job is.</p>
                             </div>
                         </div>
-                         <div class="glass-card p-3 rounded-lg border-l-4 border-l-red-500/50 flex gap-3 items-center">
+                         <div class="flex gap-3 items-center justify-start bg-white/5 p-3 rounded-lg border-l-4 border-l-red-500/50">
                             <div class="w-8 h-8 rounded-md bg-red-500/10 flex items-center justify-center flex-shrink-0 text-red-500 text-sm">
                                 <i class="fa-regular fa-clock"></i>
                             </div>
-                            <div>
+                            <div class="text-left">
                                 <h3 class="font-bold text-white text-sm">Wasted Time</h3>
                                 <p class="text-xs text-gray-400">Hours spent chasing dead-end leads.</p>
                             </div>
                         </div>
-                         <div class="glass-card p-3 rounded-lg border-l-4 border-l-red-500/50 flex gap-3 items-center">
+                         <div class="flex gap-3 items-center justify-start bg-white/5 p-3 rounded-lg border-l-4 border-l-red-500/50">
                             <div class="w-8 h-8 rounded-md bg-red-500/10 flex items-center justify-center flex-shrink-0 text-red-500 text-sm">
                                 <i class="fa-solid fa-chart-line"></i>
                             </div>
-                            <div>
+                            <div class="text-left">
                                 <h3 class="font-bold text-white text-sm">Growth Ceiling</h3>
                                 <p class="text-xs text-gray-400">Can't hire because work isn't consistent.</p>
                             </div>
@@ -243,32 +250,32 @@ src="https://www.facebook.com/tr?id=1332380321025660&ev=PageView&noscript=1"
                     </div>
                 </div>
 
-                <div id="solution" class="glow-card rounded-2xl p-6 md:p-8 relative overflow-hidden text-center lg:text-left">
-                    <p class="text-green-500 font-semibold text-xs tracking-wider mb-2">THE SOLUTION</p>
-                    <h2 class="text-2xl md:text-3xl font-bold mb-4"><span class="gradient-text">Performance Partnership</span></h2>
-                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                <div id="solution" class="bg-white text-brand-navy rounded-2xl p-6 md:p-8 relative overflow-hidden text-left shadow-2xl" data-aos="zoom-in">
+                    <p class="text-brand-teal font-semibold text-xs tracking-wider mb-2">THE SOLUTION</p>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4">Performance <span class="gradient-text">Partnership</span></h2>
+                    <p class="text-slate-500 text-sm mb-6 leading-relaxed">
                         A complete system that puts confirmed, qualified appointments directly into your calendar.
                     </p>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4 text-left">
-                        <div class="bg-white/5 border border-white/10 p-4 rounded-xl">
-                            <div class="text-blue-400 text-xl mb-2"><i class="fa-solid fa-arrow-trend-up"></i></div>
-                            <h3 class="font-bold text-sm text-white mb-1">Guaranteed Results</h3>
-                            <p class="text-xs text-gray-400">We deliver confirmed, qualified booked estimate requests directly to your calendar, not just raw leads.</p>
+                        <div class="bg-brand-surface border border-blue-100 p-4 rounded-xl">
+                            <div class="text-brand-blue text-xl mb-2"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                            <h3 class="font-bold text-sm text-brand-navy mb-1">Guaranteed Results</h3>
+                            <p class="text-xs text-slate-500">We deliver confirmed, qualified booked estimate requests directly to your calendar.</p>
                         </div>
-                        <div class="bg-white/5 border border-white/10 p-4 rounded-xl">
-                            <div class="text-purple-400 text-xl mb-2"><i class="fa-solid fa-building-columns"></i></div>
-                            <h3 class="font-bold text-sm text-white mb-1">Long-Term Foundation</h3>
-                            <p class="text-xs text-gray-400">We build sustainable brand growth that lasts years, not just a few weeks like most agencies.</p>
+                        <div class="bg-brand-surface border border-blue-100 p-4 rounded-xl">
+                            <div class="text-brand-teal text-xl mb-2"><i class="fa-solid fa-building-columns"></i></div>
+                            <h3 class="font-bold text-sm text-brand-navy mb-1">Long-Term Foundation</h3>
+                            <p class="text-xs text-slate-500">We build sustainable brand growth that lasts years.</p>
                         </div>
                     </div>
 
-                    <div class="gradient-btn w-full p-4 rounded-xl flex justify-between items-center text-left">
+                    <div class="btn-primary w-full p-4 rounded-xl flex justify-between items-center text-left text-white shadow-lg">
                         <div>
-                            <h3 class="text-lg font-bold text-white">0% Risk Guarantee</h3>
-                            <p class="text-white/80 text-xs mt-0.5">We hit our numbers or you get your money back.</p>
+                            <h3 class="text-lg font-bold">0% Risk Guarantee</h3>
+                            <p class="text-white/90 text-xs mt-0.5">We hit our numbers or you get your money back.</p>
                         </div>
-                        <div class="text-2xl font-bold text-white">$</div>
+                        <div class="text-2xl font-bold">$</div>
                     </div>
                 </div>
 
@@ -276,78 +283,79 @@ src="https://www.facebook.com/tr?id=1332380321025660&ev=PageView&noscript=1"
         </div>
     </section>
 
-    <section id="process" class="py-20">
+    <section id="process" class="py-20 bg-white border-b border-white/50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-4xl font-bold mb-4"><span class="gradient-text">The Introscale Engine</span></h2>
-                <p class="text-gray-400">Our entire process is automated. You only get involved when a new appointment appears.</p>
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-bold mb-4 text-brand-navy"><span class="gradient-text">The Introscale Engine</span></h2>
+                <p class="text-slate-500">Our entire process is automated. You only get involved when a new appointment appears.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="glass-card p-8 rounded-2xl hover:border-blue-500/50 transition duration-300 group">
-                    <div class="w-14 h-14 rounded-xl bg-blue-600/20 flex items-center justify-center text-blue-500 text-2xl mb-6 group-hover:scale-110 transition">
+                <div class="glass-card p-8 rounded-2xl bg-white border border-brand-teal/30 md:border-white/80 transition duration-500 group md:hover:-translate-y-3 md:hover:shadow-2xl md:hover:shadow-brand-blue/20 md:hover:border-brand-teal/40" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 rounded-xl bg-cyan-50 flex items-center justify-center text-brand-teal text-2xl mb-6 md:group-hover:scale-110 md:group-hover:rotate-3 transition duration-500">
                         <i class="fa-solid fa-location-dot"></i>
                     </div>
-                    <p class="text-xs font-bold text-blue-500 uppercase tracking-wider mb-2">Step 01</p>
-                    <h3 class="text-xl font-bold mb-3">Hyper-Local Targeting</h3>
-                    <p class="text-sm text-gray-400 leading-relaxed">We launch campaigns to generate leads in a 10-15 mile radius of your service area.</p>
+                    <p class="text-xs font-bold text-brand-teal uppercase tracking-wider mb-2">Step 01</p>
+                    <h3 class="text-xl font-bold mb-3 text-brand-navy">Hyper-Local Targeting</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">We launch campaigns to generate leads in a 10-15 mile radius of your service area.</p>
                 </div>
 
-                <div class="glass-card p-8 rounded-2xl hover:border-blue-500/50 transition duration-300 group">
-                    <div class="w-14 h-14 rounded-xl bg-blue-600/20 flex items-center justify-center text-blue-500 text-2xl mb-6 group-hover:scale-110 transition">
+                <div class="glass-card p-8 rounded-2xl bg-white border border-brand-teal/30 md:border-white/80 transition duration-500 group md:hover:-translate-y-3 md:hover:shadow-2xl md:hover:shadow-brand-blue/20 md:hover:border-brand-teal/40" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 rounded-xl bg-blue-50 flex items-center justify-center text-brand-blue text-2xl mb-6 md:group-hover:scale-110 md:group-hover:rotate-3 transition duration-500">
                         <i class="fa-solid fa-mobile-screen-button"></i>
                     </div>
-                    <p class="text-xs font-bold text-blue-500 uppercase tracking-wider mb-2">Step 02</p>
-                    <h3 class="text-xl font-bold mb-3">Instant Lead Capture</h3>
-                    <p class="text-sm text-gray-400 leading-relaxed">Leads are engaged via Call, SMS & email in under 60 seconds the moment they sign up.</p>
+                    <p class="text-xs font-bold text-brand-blue uppercase tracking-wider mb-2">Step 02</p>
+                    <h3 class="text-xl font-bold mb-3 text-brand-navy">Instant Lead Capture</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Leads are engaged via Call, SMS & email in under 60 seconds the moment they sign up.</p>
                 </div>
 
-                <div class="glass-card p-8 rounded-2xl hover:border-purple-500/50 transition duration-300 group">
-                    <div class="w-14 h-14 rounded-xl bg-purple-600/20 flex items-center justify-center text-purple-500 text-2xl mb-6 group-hover:scale-110 transition">
+                <div class="glass-card p-8 rounded-2xl bg-white border border-brand-teal/30 md:border-white/80 transition duration-500 group md:hover:-translate-y-3 md:hover:shadow-2xl md:hover:shadow-brand-blue/20 md:hover:border-brand-teal/40" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-14 h-14 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-500 text-2xl mb-6 md:group-hover:scale-110 md:group-hover:-rotate-3 transition duration-500">
                         <i class="fa-solid fa-robot"></i>
                     </div>
-                    <p class="text-xs font-bold text-purple-500 uppercase tracking-wider mb-2">Step 03</p>
-                    <h3 class="text-xl font-bold mb-3">AI Nurture & Qualify</h3>
-                    <p class="text-sm text-gray-400 leading-relaxed">Our system filters out tire-kickers so you only talk to serious buyers ready to book.</p>
+                    <p class="text-xs font-bold text-indigo-500 uppercase tracking-wider mb-2">Step 03</p>
+                    <h3 class="text-xl font-bold mb-3 text-brand-navy">AI Nurture & Qualify</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Our system filters out tire-kickers so you only talk to serious buyers ready to book.</p>
                 </div>
 
-                <div class="glass-card p-8 rounded-2xl hover:border-purple-500/50 transition duration-300 group">
-                    <div class="w-14 h-14 rounded-xl bg-purple-600/20 flex items-center justify-center text-purple-500 text-2xl mb-6 group-hover:scale-110 transition">
+                <div class="glass-card p-8 rounded-2xl bg-white border border-brand-teal/30 md:border-white/80 transition duration-500 group md:hover:-translate-y-3 md:hover:shadow-2xl md:hover:shadow-brand-blue/20 md:hover:border-brand-teal/40" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-14 h-14 rounded-xl bg-purple-50 flex items-center justify-center text-purple-500 text-2xl mb-6 md:group-hover:scale-110 md:group-hover:rotate-3 transition duration-500">
                         <i class="fa-regular fa-calendar-check"></i>
                     </div>
                     <p class="text-xs font-bold text-purple-500 uppercase tracking-wider mb-2">Step 04</p>
-                    <h3 class="text-xl font-bold mb-3">Auto-Booked Appointment</h3>
-                    <p class="text-sm text-gray-400 leading-relaxed">Qualified leads book a time on your calendar. No chasing, no phone tag.</p>
+                    <h3 class="text-xl font-bold mb-3 text-brand-navy">Auto-Booked Appointment</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Qualified leads book a time on your calendar. No chasing, no phone tag.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="comparison" class="py-20">
+    <section id="comparison" class="py-20 relative bg-brand-surface">
         <div class="max-w-5xl mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-5xl font-bold mb-12 tracking-tight"><span class="gradient-text">What makes us stand out in the industry</span></h2>
+            <h2 class="text-3xl md:text-5xl font-bold mb-12 tracking-tight text-brand-navy"><span class="gradient-text">What makes us stand out in the industry</span></h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 
-                <div class="p-8 rounded-3xl border border-white/10 bg-[#0f0f0f] text-left relative overflow-hidden">
-                    <h3 class="text-2xl font-bold text-gray-400 mb-6">Other Agencies</h3>
+                <div class="p-8 rounded-3xl border border-blue-100 bg-white/60 backdrop-blur text-left relative overflow-hidden" data-aos="fade-right">
+                    <h3 class="text-2xl font-bold text-slate-400 mb-6">Other Agencies</h3>
                     <ul class="space-y-4">
-                        <li class="flex items-center gap-3 text-gray-400"><div class="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 text-xs"><i class="fa-solid fa-xmark"></i></div> Shared, low-quality leads</li>
-                        <li class="flex items-center gap-3 text-gray-400"><div class="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 text-xs"><i class="fa-solid fa-xmark"></i></div> Long 6-12 month contracts</li>
-                        <li class="flex items-center gap-3 text-gray-400"><div class="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 text-xs"><i class="fa-solid fa-xmark"></i></div> No guarantees (you pay regardless)</li>
-                        <li class="flex items-center gap-3 text-gray-400"><div class="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 text-xs"><i class="fa-solid fa-xmark"></i></div> Manual follow-up required</li>
-                        <li class="flex items-center gap-3 text-gray-400"><div class="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 text-xs"><i class="fa-solid fa-xmark"></i></div> Generic marketing strategies</li>
+                        <li class="flex items-center gap-3 text-slate-500"><div class="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center text-red-500 text-xs"><i class="fa-solid fa-xmark"></i></div> Shared, low-quality leads</li>
+                        <li class="flex items-center gap-3 text-slate-500"><div class="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center text-red-500 text-xs"><i class="fa-solid fa-xmark"></i></div> Long 6-12 month contracts</li>
+                        <li class="flex items-center gap-3 text-slate-500"><div class="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center text-red-500 text-xs"><i class="fa-solid fa-xmark"></i></div> No guarantees (you pay regardless)</li>
+                        <li class="flex items-center gap-3 text-slate-500"><div class="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center text-red-500 text-xs"><i class="fa-solid fa-xmark"></i></div> Manual follow-up required</li>
+                        <li class="flex items-center gap-3 text-slate-500"><div class="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center text-red-500 text-xs"><i class="fa-solid fa-xmark"></i></div> Generic marketing strategies</li>
                     </ul>
                 </div>
 
-                <div class="p-8 rounded-3xl border border-blue-500/30 bg-blue-900/10 backdrop-blur-md text-left relative overflow-hidden shadow-[0_0_50px_-12px_rgba(59,130,246,0.3)] scale-105 z-10">
-                    <h3 class="text-2xl font-bold text-white mb-6">Introscale</h3>
+                <div class="p-8 rounded-3xl border border-brand-teal/20 bg-white shadow-2xl text-left relative overflow-hidden scale-105 z-10" data-aos="fade-left">
+                    <div class="absolute top-0 right-0 bg-brand-teal text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl rounded-tr-3xl uppercase">Recommended</div>
+                    <h3 class="text-2xl font-bold text-brand-navy mb-6">Introscale</h3>
                     <ul class="space-y-4">
-                        <li class="flex items-center gap-3 text-white"><div class="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 text-xs"><i class="fa-solid fa-check"></i></div> 100% Exclusive Booked Estimate Requests</li>
-                        <li class="flex items-center gap-3 text-white"><div class="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 text-xs"><i class="fa-solid fa-check"></i></div> No lock-in (Month-to-Month)</li>
-                        <li class="flex items-center gap-3 text-white"><div class="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 text-xs"><i class="fa-solid fa-check"></i></div> 0% Risk (Guaranteed Results)</li>
-                        <li class="flex items-center gap-3 text-white"><div class="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 text-xs"><i class="fa-solid fa-check"></i></div> Fully Automated AI Nurture</li>
-                        <li class="flex items-center gap-3 text-white"><div class="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 text-xs"><i class="fa-solid fa-check"></i></div> Custom-Built Foundations</li>
+                        <li class="flex items-center gap-3 text-brand-navy font-semibold"><div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs"><i class="fa-solid fa-check"></i></div> 100% Exclusive Booked Estimate Requests</li>
+                        <li class="flex items-center gap-3 text-brand-navy font-semibold"><div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs"><i class="fa-solid fa-check"></i></div> No lock-in (Month-to-Month)</li>
+                        <li class="flex items-center gap-3 text-brand-navy font-semibold"><div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs"><i class="fa-solid fa-check"></i></div> 0% Risk (Guaranteed Results)</li>
+                        <li class="flex items-center gap-3 text-brand-navy font-semibold"><div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs"><i class="fa-solid fa-check"></i></div> Fully Automated AI Nurture</li>
+                        <li class="flex items-center gap-3 text-brand-navy font-semibold"><div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs"><i class="fa-solid fa-check"></i></div> Custom-Built Foundations</li>
                     </ul>
                 </div>
 
@@ -355,23 +363,22 @@ src="https://www.facebook.com/tr?id=1332380321025660&ev=PageView&noscript=1"
         </div>
     </section>
 
-    <section id="results" class="py-20 overflow-hidden">
-        <div class="text-center max-w-3xl mx-auto mb-12 px-4">
-            <h2 class="text-4xl md:text-5xl font-bold mb-4"><span class="gradient-text">Real Results</span></h2>
+    <section id="results" class="py-20 overflow-hidden bg-brand-navy relative">
+        <div class="text-center max-w-3xl mx-auto mb-12 px-4 relative z-10">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 text-white"><span class="gradient-text">Real Results</span></h2>
             <p class="text-gray-400 text-lg mb-8">Hear from pressure washing owners just like you who are no longer stuck in the "Technician's Trap."</p>
             
-            <div class="inline-flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full border border-white/10">
+            <div class="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full border border-white/10 text-white backdrop-blur-sm">
                 <span class="font-bold text-xl">4.8</span>
-                <span class="w-1 h-1 rounded-full bg-gray-500"></span>
+                <span class="w-1 h-1 rounded-full bg-gray-400"></span>
                 <span class="text-sm text-gray-300">20+ reviews on</span>
-                <i class="fa-solid fa-star text-green-500"></i>
-                <span class="font-bold text-white">Trustpilot</span>
+                <img src="logo-white.svg" alt="Trustpilot" class="h-5 w-auto">
             </div>
         </div>
 
-        <div class="hidden md:block relative w-full">
-            <div class="absolute left-0 top-0 h-full w-40 bg-gradient-to-r from-black/20 to-transparent z-10 pointer-events-none"></div>
-            <div class="absolute right-0 top-0 h-full w-40 bg-gradient-to-l from-black/20 to-transparent z-10 pointer-events-none"></div>
+        <div class="hidden md:block relative w-full z-10">
+            <div class="absolute left-0 top-0 h-full w-40 bg-gradient-to-r from-brand-navy to-transparent z-10 pointer-events-none"></div>
+            <div class="absolute right-0 top-0 h-full w-40 bg-gradient-to-l from-brand-navy to-transparent z-10 pointer-events-none"></div>
 
             <div class="flex gap-6 w-max animate-scroll pointer-events-none">
                 <div class="flex gap-6" id="review-set-1"></div>
@@ -379,29 +386,31 @@ src="https://www.facebook.com/tr?id=1332380321025660&ev=PageView&noscript=1"
             </div>
         </div>
 
-        <div class="md:hidden flex flex-col items-center gap-6 w-full px-4" id="mobile-reviews"></div>
+        <div class="md:hidden flex flex-col items-center gap-6 w-full px-4 relative z-10" id="mobile-reviews"></div>
     </section>
 
-    <section class="py-12 px-4">
-        <div class="max-w-4xl mx-auto glow-card rounded-3xl p-8 md:p-10 text-center relative overflow-hidden">
+    <section class="py-12 px-4 bg-white">
+        <div class="max-w-4xl mx-auto bg-brand-navy rounded-3xl p-8 md:p-10 text-center relative overflow-hidden shadow-[0_20px_60px_-15px_rgba(6,182,212,0.5)]">
             
-            <div class="inline-block px-4 py-1 rounded-full bg-blue-900/30 text-blue-400 border border-blue-500/30 text-sm font-medium mb-4">
+            <div class="absolute top-0 left-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+            
+            <div class="inline-block px-4 py-1 rounded-full bg-white/10 text-brand-teal border border-white/10 text-sm font-medium mb-4 relative z-10">
                 <i class="fa-solid fa-shield-halved mr-2"></i> Ironclad Promise
             </div>
 
-            <h2 class="text-3xl md:text-5xl font-bold mb-4 leading-tight">
+            <h2 class="text-3xl md:text-5xl font-bold mb-4 leading-tight relative z-10 text-white">
                 <span class="gradient-text">0% Risk.<br>100% Results.</span>
             </h2>
             
-            <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-6">
+            <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-6 relative z-10">
                 If we don't hit our promised booked estimate requests, we'll refund your service fee. The risk is entirely on us.
             </p>
             
-            <a href="calendar.html" class="inline-block bg-white text-black text-base md:text-lg font-bold px-6 py-3 md:px-8 md:py-3 rounded-full hover:scale-105 transition shadow-[0_0_30px_rgba(255,255,255,0.3)] whitespace-nowrap">
+            <a href="calendar.html" class="btn-primary text-lg md:text-xl font-bold px-6 md:px-10 py-5 rounded-full shadow-xl shadow-brand-teal/30 hover:shadow-2xl hover:shadow-brand-teal/40 transform transition hover:-translate-y-1 inline-block relative z-10 whitespace-nowrap">
                 Claim Your Strategy Call
             </a>
 
-            <div class="mt-6 flex flex-col md:flex-row justify-center items-center gap-6 text-sm text-gray-400">
+            <div class="mt-6 flex flex-col md:flex-row justify-center items-center gap-6 text-sm text-gray-400 relative z-10">
                 <span class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> No Lock-in Contracts</span>
                 <span class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> Cancel Anytime</span>
                 <span class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> Results Guaranteed</span>
@@ -409,64 +418,64 @@ src="https://www.facebook.com/tr?id=1332380321025660&ev=PageView&noscript=1"
         </div>
     </section>
 
-    <section id="faq" class="py-20">
+    <section id="faq" class="py-20 bg-white border-t border-blue-100">
         <div class="max-w-4xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4"><span class="gradient-text">Everything You Need To Know</span></h2>
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4 text-brand-navy"><span class="gradient-text">Everything You Need To Know</span></h2>
             </div>
 
             <div class="space-y-4">
-                <div class="glass-card rounded-2xl overflow-hidden">
+                <div class="glass-card rounded-2xl overflow-hidden shadow-sm" data-aos="fade-up">
                     <details class="group">
-                        <summary class="flex justify-between items-center cursor-pointer p-6 list-none">
-                            <span class="text-lg font-bold text-white">How does pricing work?</span>
+                        <summary class="flex justify-between items-center cursor-pointer p-6 list-none bg-white/60">
+                            <span class="text-lg font-bold text-brand-navy">How does pricing work?</span>
                             <span class="transition group-open:rotate-180">
-                                <i class="fa-solid fa-chevron-down text-blue-500"></i>
+                                <i class="fa-solid fa-chevron-down text-brand-blue"></i>
                             </span>
                         </summary>
-                        <div class="text-gray-400 px-6 pb-6 leading-relaxed border-t border-white/5 pt-4">
+                        <div class="text-slate-500 px-6 pb-6 leading-relaxed bg-white/40 pt-4">
                             We operate on a performance-first model designed for ROI. While we have a standard service fee to cover the build-out and management, our primary focus is delivering value. Since every service area varies in competition and volume, we calculate a custom pricing structure on our strategy call to ensure it makes financial sense for your specific margins.
                         </div>
                     </details>
                 </div>
 
-                <div class="glass-card rounded-2xl overflow-hidden">
+                <div class="glass-card rounded-2xl overflow-hidden shadow-sm" data-aos="fade-up">
                     <details class="group">
-                        <summary class="flex justify-between items-center cursor-pointer p-6 list-none">
-                            <span class="text-lg font-bold text-white">I've been burned by agencies. Why are you different?</span>
+                        <summary class="flex justify-between items-center cursor-pointer p-6 list-none bg-white/60">
+                            <span class="text-lg font-bold text-brand-navy">I've been burned by agencies. Why are you different?</span>
                             <span class="transition group-open:rotate-180">
-                                <i class="fa-solid fa-chevron-down text-blue-500"></i>
+                                <i class="fa-solid fa-chevron-down text-brand-blue"></i>
                             </span>
                         </summary>
-                        <div class="text-gray-400 px-6 pb-6 leading-relaxed border-t border-white/5 pt-4">
+                        <div class="text-slate-500 px-6 pb-6 leading-relaxed bg-white/40 pt-4">
                             We hate the "agency" label too. Most sell you shared leads and disappear. We function as a growth partner, installing a complete booked-appointment engine into your business. With our month-to-month structure and performance guarantee, we are financially motivated to keep winning for you every single month, or we lose your business.
                         </div>
                     </details>
                 </div>
 
-                <div class="glass-card rounded-2xl overflow-hidden">
+                <div class="glass-card rounded-2xl overflow-hidden shadow-sm" data-aos="fade-up">
                     <details class="group">
-                        <summary class="flex justify-between items-center cursor-pointer p-6 list-none">
-                            <span class="text-lg font-bold text-white">My business is unique. Will this work for me?</span>
+                        <summary class="flex justify-between items-center cursor-pointer p-6 list-none bg-white/60">
+                            <span class="text-lg font-bold text-brand-navy">My business is unique. Will this work for me?</span>
                             <span class="transition group-open:rotate-180">
-                                <i class="fa-solid fa-chevron-down text-blue-500"></i>
+                                <i class="fa-solid fa-chevron-down text-brand-blue"></i>
                             </span>
                         </summary>
-                        <div class="text-gray-400 px-6 pb-6 leading-relaxed border-t border-white/5 pt-4">
+                        <div class="text-slate-500 px-6 pb-6 leading-relaxed bg-white/40 pt-4">
                             While the core mechanism of our engine is proven across the country, the fuel we put in is custom to you. We adjust targeting, ad copy, and qualification scripts to fit your specific services (e.g., roof wash vs. concrete), pricing model, and crew capacity. We don't force a square peg into a round hole; we build the system around your reality.
                         </div>
                     </details>
                 </div>
 
-                <div class="glass-card rounded-2xl overflow-hidden">
+                <div class="glass-card rounded-2xl overflow-hidden shadow-sm" data-aos="fade-up">
                     <details class="group">
-                        <summary class="flex justify-between items-center cursor-pointer p-6 list-none">
-                            <span class="text-lg font-bold text-white">Do you really offer a guarantee?</span>
+                        <summary class="flex justify-between items-center cursor-pointer p-6 list-none bg-white/60">
+                            <span class="text-lg font-bold text-brand-navy">Do you really offer a guarantee?</span>
                             <span class="transition group-open:rotate-180">
-                                <i class="fa-solid fa-chevron-down text-blue-500"></i>
+                                <i class="fa-solid fa-chevron-down text-brand-blue"></i>
                             </span>
                         </summary>
-                        <div class="text-gray-400 px-6 pb-6 leading-relaxed border-t border-white/5 pt-4">
+                        <div class="text-slate-500 px-6 pb-6 leading-relaxed bg-white/40 pt-4">
                             Yes. It’s simple: We promise a minimum number of qualified booked estimate requests. If we don't hit that number, you don't pay for our service. We refund your service fee, and you keep any bookings we did generate for free. This removes your risk and puts the burden of performance entirely on our shoulders.
                         </div>
                     </details>
@@ -475,28 +484,28 @@ src="https://www.facebook.com/tr?id=1332380321025660&ev=PageView&noscript=1"
         </div>
     </section>
 
-    <section class="py-8">
+    <section class="py-16 bg-gradient-to-br from-blue-50 to-indigo-50 border-t border-blue-100/50">
         <div class="max-w-7xl mx-auto px-4 text-center">
             <h2 class="text-3xl md:text-4xl font-bold mb-6"><span class="gradient-text">Get in Touch</span></h2>
-            <p class="text-gray-400 text-lg mb-8">Have a quick question before booking? Feel free to reach out.</p>
+            <p class="text-slate-500 text-lg mb-8">Have a quick question before booking? Feel free to reach out.</p>
             
             <div class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16">
-                <a href="mailto:info@introscale.com" class="flex items-center gap-3 text-lg hover:text-blue-400 transition">
-                    <i class="fa-regular fa-envelope text-xl"></i>
+                <a href="mailto:info@introscale.com" class="flex items-center gap-3 text-lg text-slate-700 font-medium hover:text-brand-blue transition">
+                    <i class="fa-regular fa-envelope text-xl text-brand-teal"></i>
                     info@introscale.com
                 </a>
-                <a href="tel:+14159413717" class="flex items-center gap-3 text-lg hover:text-blue-400 transition">
-                    <i class="fa-solid fa-phone text-xl"></i>
+                <a href="tel:+14159413717" class="flex items-center gap-3 text-lg text-slate-700 font-medium hover:text-brand-blue transition">
+                    <i class="fa-solid fa-phone text-xl text-brand-teal"></i>
                     +1 415 941 3717
                 </a>
             </div>
         </div>
     </section>
 
-    <footer class="bg-black py-12 border-t border-white/10">
+    <footer class="bg-brand-navy py-12 border-t border-white/10 text-white">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <a href="index.html" class="inline-block mb-8">
-                <img src="favicon.png" alt="Introscale Logo" class="w-12 h-12 mx-auto">
+            <a href="index.html" class="inline-block mb-8 group">
+                <span class="text-2xl font-extrabold tracking-tighter text-brand-white group-hover:opacity-80 transition">INTROSCALE</span>
             </a>
             
             <div class="flex justify-center gap-8 mb-8 flex-wrap">
@@ -506,26 +515,25 @@ src="https://www.facebook.com/tr?id=1332380321025660&ev=PageView&noscript=1"
                 <a href="refund-policy.html" class="text-gray-400 hover:text-white text-sm">Refund Policy</a>
             </div>
             
-            <p class="text-gray-600 text-sm mb-4">&copy; 2025 Introscale. All rights reserved.</p>
+            <p class="text-gray-500 text-sm mb-4">&copy; 2025 Introscale. All rights reserved.</p>
             
-            <p class="text-gray-700 text-xs max-w-2xl mx-auto leading-relaxed">
+            <p class="text-gray-600 text-xs max-w-2xl mx-auto leading-relaxed">
                 This website is not part of the YouTube, Google, or Facebook website; Google Inc or Facebook Inc. Also, this website is NOT endorsed by YouTube, Google or Facebook in any way.
             </p>
         </div>
     </footer>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Mouse Glow Logic
-        document.addEventListener('mousemove', (e) => {
-            const glowLayer = document.getElementById('glow-layer');
-            if (glowLayer) {
-                // Pass cursor coordinates to CSS
-                glowLayer.style.setProperty('--x', `${e.clientX}px`);
-                glowLayer.style.setProperty('--y', `${e.clientY}px`);
-            }
+        // Initialize Animations - disabled on mobile
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50,
+            disable: 'mobile' 
         });
 
-        // Review Data & Logic
+        // Updated Review Data
         const reviews = [
             { company: "Fresh Wash Co.", logoImg: "logos/fresh-wash-co.png", time: "1 month ago", quote: "Man, I was so done with the shared lead rat race. I used to rely on HomeAdvisor, but fighting five other contractors for one tire-kicker who just wants the cheapest price? Never again. Introscale is a totally different ballgame. The leads are exclusive to me—they actually see my brand, not a generic list. I’m finally booking solid work instead of just racing to be the lowest bid. If you want off the hamster wheel, give these guys a shot.", name: "Ethan Thomas", profileImg: "logos/owner1.png", role: "Business Owner", verified: true },
             { company: "Crystal Clean Wash", logoImg: "logos/crystal-clean-wash.png", time: "2 months ago", quote: "I tried running my own FB ads for a while. Total nightmare. I was spending half my day texting people who never replied. Introscale fixed the one thing I sucked at: the follow-up. Their AI handles the initial texts and vets the customer before I even get a notification. Now, I just check my phone and see qualified leads sending me photos of their house. My close rate jumped to 40% in month one just because I stopped chasing ghosts.", name: "Matthew Lewis", profileImg: "logos/owner2.png", role: "Owner, Crystal Clean Wash", verified: true },
@@ -541,28 +549,37 @@ src="https://www.facebook.com/tr?id=1332380321025660&ev=PageView&noscript=1"
             { company: "ProShine Services", logoImg: "logos/proshine-services.png", time: "last year", quote: "In this business, if you don't answer in 5 minutes, you lose the job. But I can't answer when I'm blasting a driveway. The 'Missed Call Text Back' feature is a lifesaver. Had a lady yesterday tell me she was dialing my competitor when my automated text came through instantly. We closed the deal via text 10 minutes later. That one feature alone is worth the monthly fee.", name: "Kevin Peterson", profileImg: "logos/owner12.png", role: "Owner, ProShine Services", verified: false }
         ];
 
+        // CHANGED: RESTRUCTURED createCard TO PERSON-FIRST FORMAT
         function createCard(review) {
-            // Added loading="eager" for LCP improvement
-            // Removed blue tick logic - now unconditional blue tick for everyone
             return `
-                <div class="w-full sm:w-[400px] bg-[#0f0f0f] border border-white/10 rounded-2xl p-6 flex-shrink-0 select-none">
+                <div class="w-full sm:w-[400px] bg-white border border-gray-200 shadow-sm rounded-2xl p-6 flex-shrink-0 select-none">
+                    
                     <div class="flex justify-between items-start mb-4">
                         <div class="flex items-center gap-3">
-                            <img src="${review.logoImg}" loading="eager" alt="${review.company} Logo" width="40" height="40" class="w-10 h-10 rounded-full object-cover bg-white/10">
+                            <img src="${review.profileImg}" loading="eager" alt="${review.name}" width="40" height="40" class="w-10 h-10 rounded-full object-cover bg-slate-100 border border-slate-200">
                             <div>
-                                <h3 class="text-white font-bold text-sm flex items-center gap-1">
-                                    ${review.company} 
-                                    <i class="fa-solid fa-circle-check text-blue-500 text-xs"></i>
-                                </h3>
+                                <h3 class="text-brand-navy font-bold text-sm leading-tight">${review.name}</h3>
+                                <img src="stars-5.svg" alt="5 Stars" class="h-3 w-auto mt-1">
                             </div>
                         </div>
+                        <span class="text-[10px] text-slate-400 font-medium">${review.time}</span>
                     </div>
-                    <p class="text-gray-300 text-sm italic mb-6 leading-relaxed">"${review.quote}"</p>
-                    <div class="flex items-center gap-3 pt-4 border-t border-white/5">
-                        <img src="${review.profileImg}" loading="eager" alt="${review.name}" width="32" height="32" class="w-8 h-8 rounded-full object-cover bg-gray-800">
-                        <div>
-                            <p class="text-white font-bold text-xs">${review.name}</p>
-                            <p class="text-gray-400 text-[10px] uppercase tracking-wide">${review.role}</p>
+
+                    <p class="text-slate-600 text-sm mb-5 leading-relaxed">
+                        "${review.quote}"
+                    </p>
+
+                    <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
+                        <div class="w-6 h-6 rounded-full bg-slate-50 p-0.5 flex items-center justify-center border border-slate-100">
+                            <img src="${review.logoImg}" alt="${review.company}" class="w-full h-full object-contain opacity-80">
+                        </div>
+                        <div class="flex flex-col">
+                            <p class="text-xs text-slate-500 font-medium">Owner, <span class="text-slate-800 font-bold">${review.company}</span></p>
+                        </div>
+                        
+                        <div class="ml-auto flex items-center gap-1 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-100">
+                            <i class="fa-solid fa-check text-[10px] text-brand-blue"></i>
+                            <span class="text-[10px] font-bold text-brand-blue">Verified</span>
                         </div>
                     </div>
                 </div>
