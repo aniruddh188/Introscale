@@ -38,7 +38,7 @@
                     },
                     animation: {
                         'blob': 'blob 7s infinite',
-                        'scroll': 'scroll 250s linear infinite',
+                        'scroll': 'scroll 150s linear infinite',
                     },
                     keyframes: {
                         blob: {
@@ -130,6 +130,11 @@
         @keyframes slideDown {
             0% { opacity: 0; transform: translateY(-10px); }
             100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Pause Animation on Hover */
+        .animate-scroll:hover {
+            animation-play-state: paused;
         }
     </style>
     <script>
@@ -367,7 +372,7 @@
         </div>
     </section>
 
-    <section id="results" class="py-20 overflow-hidden bg-brand-navy relative">
+    <section id="results" class="py-20 overflow-hidden bg-brand-navy relative group">
         <div class="text-center max-w-3xl mx-auto mb-12 px-4 relative z-10">
             <h2 class="text-4xl md:text-5xl font-bold mb-4 text-white"><span class="gradient-text">Real Results</span></h2>
             <p class="text-gray-400 text-lg mb-8">Hear from pressure washing owners just like you who are no longer stuck in the "Technician's Trap."</p>
@@ -385,8 +390,8 @@
             <div class="absolute right-0 top-0 h-full w-40 bg-gradient-to-l from-brand-navy to-transparent z-10 pointer-events-none"></div>
 
             <div class="flex gap-6 w-max animate-scroll pointer-events-none">
-                <div class="flex gap-6" id="review-set-1"></div>
-                <div class="flex gap-6" id="review-set-2"></div>
+                <div class="flex gap-6 pointer-events-auto" id="review-set-1"></div>
+                <div class="flex gap-6 pointer-events-auto" id="review-set-2"></div>
             </div>
         </div>
 
@@ -527,6 +532,13 @@
         </div>
     </footer>
 
+    <div id="image-modal" class="fixed inset-0 z-[100] hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 cursor-pointer" onclick="closeModal()">
+        <div class="relative max-w-4xl w-full max-h-screen flex items-center justify-center p-2">
+            <button onclick="closeModal()" class="absolute -top-12 right-0 text-white text-4xl hover:text-brand-teal transition">&times;</button>
+            <img id="modal-image" src="" alt="Review Full" class="w-auto h-auto max-h-[90vh] max-w-full object-contain rounded-lg shadow-2xl">
+        </div>
+    </div>
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // Initialize Animations - disabled on mobile
@@ -537,63 +549,21 @@
             disable: 'mobile' 
         });
 
-        // Updated Review Data
-        const reviews = [
-            { company: "Fresh Wash Co.", logoImg: "logos/fresh-wash-co.png", time: "1 month ago", quote: "Man, I was so done with the shared lead rat race. I used to rely on HomeAdvisor, but fighting five other contractors for one tire-kicker who just wants the cheapest price? Never again. Introscale is a totally different ballgame. The leads are exclusive to me—they actually see my brand, not a generic list. I’m finally booking solid work instead of just racing to be the lowest bid. If you want off the hamster wheel, give these guys a shot.", name: "Ethan Thomas", profileImg: "logos/owner1.png", role: "Business Owner", verified: true },
-            { company: "Crystal Clean Wash", logoImg: "logos/crystal-clean-wash.png", time: "2 months ago", quote: "I tried running my own FB ads for a while. Total nightmare. I was spending half my day texting people who never replied. Introscale fixed the one thing I sucked at: the follow-up. Their AI handles the initial texts and vets the customer before I even get a notification. Now, I just check my phone and see qualified leads sending me photos of their house. My close rate jumped to 40% in month one just because I stopped chasing ghosts.", name: "Matthew Lewis", profileImg: "logos/owner2.png", role: "Owner, Crystal Clean Wash", verified: true },
-            { company: "Diamond Clean", logoImg: "logos/diamond-clean.png", time: "3 months ago", quote: "Look, I’ve been burned by marketing agencies before. They take your setup fee and disappear. I was expecting the same here, but I was desperate. Honestly? The transparency is what sold me. They gave me a dashboard where I can actually see the texts and calls happening. Their system even saved a job I missed while I was up on a roof last week—auto-booked the call for me. Finally feel like I have a partner in this, not just another monthly expense.", name: "Jacob Phillips", profileImg: "logos/owner3.png", role: "Owner, Diamond Clean", verified: false },
-            { company: "Pristine Power Wash", logoImg: "logos/pristine-power-wash.png", time: "8 months ago", quote: "Being a solo operator is tough because if I'm washing, I can't answer the phone. By the time I’d call back, they’d already hired someone else. Introscale basically acts like my front desk. The automation catches every call I miss. I landed a $1,200 roof wash specifically because their text-back system caught the lead while I was driving. It feels less like a hustle and more like a real business now.", name: "Samuel Peterson", profileImg: "logos/owner4.png", role: "Business Owner", verified: true },
-            { company: "AquaBlast Exteriors", logoImg: "logos/aquablast-exteriors.png", time: "11 months ago", quote: "I bought the skid, got the insurance, took the courses... and then sat there waiting for the phone to ring. Nobody tells you the hardest part is actually getting customers. I wasted about $1,500 trying to figure out ads myself before I hired Introscale. They plugged right into my Markate account and the volume turned on almost immediately. I did $15k last month. If you know how to wash but hate sales, just hire them.", name: "Daniel White", profileImg: "logos/owner5.png", role: "Business Owner", verified: true },
-            { company: "BrightClean Exteriors", logoImg: "logos/brightclean-exteriors.png", time: "10 months ago", quote: "If you use Jobber or Markate, this is a no-brainer. I used to hate manually typing in lead info from Facebook emails at the end of a long day. It was messy. Introscale synced everything up. Lead comes in, populates in my CRM, customer gets a text, and I get the photos. I don't touch a thing until it's time to quote. It saves me at least an hour of admin work every single night.", name: "David Martinez", profileImg: "logos/owner6.png", role: "Business Owner", verified: true },
-            { company: "Spotless Exterior", logoImg: "logos/spotless-exterior.png", time: "4 months ago", quote: "I was stuck at 12 reviews for over a year. I’m great at washing, but terrible at remembering to ask for the review. Introscale’s automation just handles it now—it texts the client after the job is done. I woke up to five new 5-star reviews in a single week. I’m finally ranking #1 in the Map Pack for my area, and the phone is ringing organically just because I have the best rating in town", name: "Alex Williamson", profileImg: "logos/owner7.png", role: "Owner, Spotless Exterior", verified: false },
-            { company: "CleanPro Washers", logoImg: "logos/cleanpro-washers.png", time: "5 months ago", quote: "When November hit, my schedule dried up and I started panicking about cash flow. Instead of burning money on ads, the Introscale team suggested a 'Database Reactivation.' We sent a text offer for gutter cleaning to my old list from two years ago. Boom—booked $4,500 in 48 hours. I didn't spend a dime on ad spend. These guys know how to squeeze revenue out of the slow months.", name: "Johnathan Miller", profileImg: "logos/owner8.png", role: "Owner, CleanPro Washers", verified: false },
-            { company: "Sparkle Wash Pros", logoImg: "logos/sparkle-wash-pros.png", time: "6 months ago", quote: "I was literally days away from hiring a call answering service like Jill’s Office, which would have cost a fortune. Introscale’s text system basically does that job for free. It handles the 'hello' and the info gathering. By the time I talk to the customer, they’re practically sold. It saved me from adding a massive overhead cost to my payroll.", name: "David Chen", profileImg: "logos/owner9.png", role: "Owner, Sparkle Wash Pros", verified: false },
-            { company: "ShinePro Cleaning", logoImg: "logos/shinepro-cleaning.png", time: "9 months ago", quote: "My biggest pet peeve was getting those 'How much for a house wash?' texts and then getting ghosted when I gave a price. I felt like I was running a charity. Introscale set up scripts that filter those people out before I waste my time. I’m doing fewer estimates, sure, but my average ticket is up $200 because I’m only talking to serious buyers. Quality over quantity..", name: "Alex Rodriguez", profileImg: "logos/owner10.png", role: "Owner, ShinePro Cleaning", verified: false },
-            { company: "FreshStart Power Wash", logoImg: "logos/freshstart-power-wash.png", time: "last year", quote: "I thought I could handle the marketing myself. Watched some YouTube, hit 'Boost Post,' and wasted $600 getting likes from people three towns over. I felt like an idiot. Introscale came in and set up the actual backend stuff—pixels, retargeting, things I don't understand. My cost per lead went from 'infinity' to about $15 bucks.", name: "Oliver James", profileImg: "logos/owner11.png", role: "Owner, FreshStart Power Wash", verified: false },
-            { company: "ProShine Services", logoImg: "logos/proshine-services.png", time: "last year", quote: "In this business, if you don't answer in 5 minutes, you lose the job. But I can't answer when I'm blasting a driveway. The 'Missed Call Text Back' feature is a lifesaver. Had a lady yesterday tell me she was dialing my competitor when my automated text came through instantly. We closed the deal via text 10 minutes later. That one feature alone is worth the monthly fee.", name: "Kevin Peterson", profileImg: "logos/owner12.png", role: "Owner, ProShine Services", verified: false }
-        ];
+        // Generate 12 Image Cards
+        const totalReviews = 12;
+        let cardsHTML = '';
 
-        // CHANGED: RESTRUCTURED createCard TO PERSON-FIRST FORMAT
-        function createCard(review) {
-            return `
-                <div class="w-full sm:w-[400px] bg-white border border-gray-200 shadow-sm rounded-2xl p-6 flex-shrink-0 select-none">
-                    
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="flex items-center gap-3">
-                            <img src="${review.profileImg}" loading="eager" alt="${review.name}" width="40" height="40" class="w-10 h-10 rounded-full object-cover bg-slate-100 border border-slate-200">
-                            <div>
-                                <h3 class="text-brand-navy font-bold text-sm leading-tight">${review.name}</h3>
-                                <img src="stars-5.svg" alt="5 Stars" class="h-3 w-auto mt-1">
-                            </div>
-                        </div>
-                        <span class="text-[10px] text-slate-400 font-medium">${review.time}</span>
-                    </div>
-
-                    <p class="text-slate-600 text-sm mb-5 leading-relaxed">
-                        ${review.quote}
-                    </p>
-
-                   <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
-                        <img src="${review.logoImg}" alt="${review.company}" width="40" height="40" class="w-10 h-10 rounded-full object-cover bg-slate-50 border border-slate-100">
-                        
-                        <div class="flex flex-col">
-                            <p class="text-xs text-slate-500 font-medium">Owner, <span class="text-slate-800 font-bold">${review.company}</span></p>
-                        </div>
-                        
-                        <div class="ml-auto flex items-center gap-1 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-100">
-                            <i class="fa-solid fa-check text-[10px] text-brand-blue"></i>
-                            <span class="text-[10px] font-bold text-brand-blue">Verified</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
+        for (let i = 1; i <= totalReviews; i++) {
+    cardsHTML += `
+        <div class="w-full sm:w-[320px] flex-shrink-0 cursor-pointer transition-transform duration-300 hover:scale-105 group/card" onclick="openModal('Reviews/Review${i}.png')">
+            <img src="Reviews/Review${i}.png" alt="Review ${i}" loading="lazy" class="w-full h-auto rounded-2xl shadow-md hover:shadow-xl transition-shadow border border-gray-100/10">
+        </div>
+    `;
+}
 
         const set1 = document.getElementById('review-set-1');
         const set2 = document.getElementById('review-set-2');
         const mobileSet = document.getElementById('mobile-reviews');
-        
-        const cardsHTML = reviews.map(createCard).join('');
         
         // Inject into Desktop Scrolling sets
         if(set1) set1.innerHTML = cardsHTML;
@@ -601,6 +571,25 @@
         
         // Inject into Mobile Stacked set
         if(mobileSet) mobileSet.innerHTML = cardsHTML;
+
+        // Modal Logic
+        function openModal(src) {
+            const modal = document.getElementById('image-modal');
+            const img = document.getElementById('modal-image');
+            if(modal && img) {
+                img.src = src;
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Stop background scrolling
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('image-modal');
+            if(modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = ''; // Restore background scrolling
+            }
+        }
     </script>
 </body>
 </html>
