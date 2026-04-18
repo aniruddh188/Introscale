@@ -1,0 +1,5 @@
+# Redirect the root domain
+https://introscale.com/* https://getvisibleimpact.com/:splat  301!
+
+# Redirect the www subdomain
+https://www.introscale.com/* https://getvisibleimpact.com/:splat  301!
